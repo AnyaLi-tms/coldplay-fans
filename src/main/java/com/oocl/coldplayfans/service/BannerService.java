@@ -17,8 +17,7 @@ public class BannerService {
         return bannerDbRepository.getAllBanners();
     }
     public Banner getBannerById(Integer id) {
-        return bannerDbRepository.getBannerById(id)
-                .orElseThrow(() -> new RuntimeException("Banner not found with id " + id));
+        return bannerDbRepository.getBannerById(id);
     }
     public Banner createBanner(Banner banner) {
         return bannerDbRepository.saveBanner(banner);
