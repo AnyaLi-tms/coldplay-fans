@@ -12,8 +12,8 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: xVbRZXxIPzfrdXGGJLIGWrOguPTqvUHY
           MYSQL_DATABASE: group1
-          MYSQL_USER: root
-          MYSQL_PASSWORD: xVbRZXxIPzfrdXGGJLIGWrOguPTqvUHY
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
         ports:
           - 11776:11776
         options: >-
