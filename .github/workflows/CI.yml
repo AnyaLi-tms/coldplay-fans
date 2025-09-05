@@ -11,7 +11,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: xVbRZXxIPzfrdXGGJLIGWrOguPTqvUHY
-          MYSQL_DATABASE: test_db
+          MYSQL_DATABASE: group1
           MYSQL_USER: root
           MYSQL_PASSWORD: xVbRZXxIPzfrdXGGJLIGWrOguPTqvUHY
         ports:
@@ -32,7 +32,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '24'
+          java-version: '21'
 
       #      - name: Cache SonarQube packages
       #        uses: actions/cache@v4
@@ -50,9 +50,9 @@ jobs:
 
       - name: Set environment variables
         run: |
-          echo "SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/flyway" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_URL=jdbc:mysql://shortline.proxy.rlwy.net:11776/group1" >> $GITHUB_ENV
           echo "SPRING_DATASOURCE_USERNAME=root" >> $GITHUB_ENV
-          echo "SPRING_DATASOURCE_PASSWORD=secret" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_PASSWORD=xVbRZXxIPzfrdXGGJLIGWrOguPTqvUHY" >> $GITHUB_ENV
 
       - name: Wait for MySQL
         run: |
