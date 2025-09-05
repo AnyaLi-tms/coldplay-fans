@@ -1,7 +1,7 @@
 name: ColdPaly Fans CI
 on:
   push:
-    branches: [release master]
+    branches: [release/* master]
 
 jobs:
   build-and-deploy:
