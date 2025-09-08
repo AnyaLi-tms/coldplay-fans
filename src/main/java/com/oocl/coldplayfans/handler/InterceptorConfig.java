@@ -15,7 +15,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                         "/user/register",
                         "/banners",
                         "/banners/*",
-                        "/concert/",
-                        "/concert/*");
+                        "/concerts",
+                        "/concerts/*");
     }
 }
