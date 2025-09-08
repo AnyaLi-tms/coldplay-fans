@@ -36,7 +36,7 @@ public class UserController {
             map.put("token", token);
         } catch (Exception e) {
             map.put("status", false);
-            map.put("msg", "登录失败");
+            map.put("msg", e.getMessage());
         }
         return map;
     }
@@ -44,9 +44,14 @@ public class UserController {
     @PostMapping("/register")
     public Map<String, Object> register(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
-        UserResponse userResponse = new UserMapper().toResponse(userService.register(user));
-        map.put("userReponse", userResponse);
-        map.put("msg", "注册成功");
+        try {
+            UserResponse userResponse = new UserMapper().toResponse(userService.register(user));
+            map.put("userReponse", userResponse);
+            map.put("msg", "注册成功");
+        } catch (Exception e) {
+            map.put("status", false);
+            map.put("msg", e.getMessage());
+        }
         return map;
     }
 

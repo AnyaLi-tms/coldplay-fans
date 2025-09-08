@@ -21,7 +21,7 @@ public class UserService {
         String storedHash = login.getPassword();
         String inputHash = PasswordUtil.encryptMD5WithSalt(user.getPassword(), salt);
         if (!inputHash.equals(storedHash)) {
-            throw new RuntimeException("密码不存在");
+            throw new RuntimeException("密码错误");
         }
         return login;
     }
