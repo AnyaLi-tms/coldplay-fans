@@ -14,7 +14,7 @@ public class UserService {
 
     public User login(User user) {
         User login = userDbRepository.getUserByName(user);
-        if(login == null){
+        if (login == null) {
             throw new RuntimeException("用户名不存在");
         }
         String salt = login.getSalt();
@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public User register(User user) {
-        if(userDbRepository.getUserByName(user) != null){
+        if (userDbRepository.getUserByName(user) != null) {
             throw new RuntimeException("用户名已存在");
         }
         user.setSalt(PasswordUtil.generateSalt());

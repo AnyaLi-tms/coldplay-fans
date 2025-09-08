@@ -22,20 +22,19 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/login")
-    public Map<String, Object> login(@RequestBody User user){
+    public Map<String, Object> login(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
-        try{
+        try {
             User login = userService.login(user);
             Map<String, String> payload = new HashMap<>();
             payload.put("id", String.valueOf(login.getId()));
             payload.put("name", login.getUsername());
             payload.put("password", login.getPassword());
             String token = JwtUtil.getToken(payload);
-
             map.put("status", true);
             map.put("msg", "登录成功");
             map.put("token", token);
-        }catch (Exception e) {
+        } catch (Exception e) {
             map.put("status", false);
             map.put("msg", "登录失败");
         }
@@ -43,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public UserResponse register(@RequestBody User user){
+    public UserResponse register(@RequestBody User user) {
         return new UserMapper().toResponse(userService.register(user));
     }
 }

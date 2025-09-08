@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDbRepository implements UserRepository{
+public class UserDbRepository implements UserRepository {
 
     @Autowired
     JpaUserRepository jpaUserRepository;
