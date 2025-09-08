@@ -1,4 +1,5 @@
 package com.oocl.coldplayfans.controller;
+import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+
+
 
 @RestController
 @RequestMapping("/concerts")
@@ -26,9 +32,15 @@ public class ConcertController {
     }
 
     @GetMapping
-    public List<Concert> getAllConcerts() {
-        return concertService.getAllConcerts();
+    public List<Concert> getAllConcerts(@RequestParam(required = false) Date startDate, @RequestParam(required = false) Date endDate, @RequestParam(required = false) String city) {
+        return concertService.getAllConcerts(startDate, endDate, city);
     }
+
+    @GetMapping("/cities")
+    public List<String> getAllCities() {
+        return concertService.getAllCities();
+    }
+    
 
     @GetMapping("/{id}")
     public Concert getConcertById(@PathVariable Integer id) {
