@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.oocl.coldplayfans.repository.ConcertDbRepository;
-import com.oocl.coldplayfans.dao.Banner;
 import com.oocl.coldplayfans.dao.Concert;
 
 
@@ -44,7 +43,7 @@ public class ConcertTest {
         perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].imgUrl").value(givenConcerts.get(3).getImgUrl()));
         perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].city").value(givenConcerts.get(3).getCity()));
         perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].status").value(givenConcerts.get(3).getStatus().toString()));
-        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].isDeleted").value(givenConcerts.get(3).isDeleted()));
+        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].deleted").value(givenConcerts.get(3).isDeleted()));
 
         perform.andExpect(MockMvcResultMatchers.jsonPath("$.[1].id").value(givenConcerts.get(2).getId()));
         perform.andExpect(MockMvcResultMatchers.jsonPath("$.[2].id").value(givenConcerts.get(1).getId()));
@@ -61,9 +60,10 @@ public class ConcertTest {
         perform.andExpect(MockMvcResultMatchers.jsonPath("$.name").value(givenConcerts.get(0).getName()));
         perform.andExpect(MockMvcResultMatchers.jsonPath("$.imgUrl").value(givenConcerts.get(0).getImgUrl()));
         perform.andExpect(MockMvcResultMatchers.jsonPath("$.city").value(givenConcerts.get(0).getCity()));
-        perform.andExpect(MockMvcResultMatchers.jsonPath("$.status").value(givenConcerts.get(0).getStatus()));
-        perform.andExpect(MockMvcResultMatchers.jsonPath("$.isDeleted").value(givenConcerts.get(0).isDeleted()));
+        perform.andExpect(MockMvcResultMatchers.jsonPath("$.status").value(givenConcerts.get(0).getStatus().toString()));
+        perform.andExpect(MockMvcResultMatchers.jsonPath("$.deleted").value(givenConcerts.get(0).isDeleted()));
     }
+
 
 }
 

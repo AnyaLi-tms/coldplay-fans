@@ -52,8 +52,6 @@ public class BannerTest {
     }
     
 
-
-
     @Test
     public void should_return_banner_when_get_id_banner_exist() throws Exception {
         List<Banner> givenBanners = bannerRepository.getAllBanners();
