@@ -42,7 +42,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public UserResponse register(@RequestBody User user) {
-        return new UserMapper().toResponse(userService.register(user));
+    public Map<String, Object> register(@RequestBody User user) {
+        Map<String, Object> map = new HashMap<>();
+        UserResponse userResponse = new UserMapper().toResponse(userService.register(user));
+        map.put("userReponse", userResponse);
+        map.put("msg", "注册成功");
+        return map;
     }
 }
