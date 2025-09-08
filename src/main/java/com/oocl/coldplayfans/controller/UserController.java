@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Map<String, Object> login(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
         try {
