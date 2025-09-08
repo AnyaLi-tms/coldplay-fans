@@ -49,4 +49,5 @@ public class UserController {
         map.put("msg", "注册成功");
         return map;
     }
+
 }

@@ -1,15 +1,39 @@
+package com.oocl.coldplayfans.integration;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.oocl.coldplayfans.repository.UserDbRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@SpringBootTest
+@AutoConfigureMockMvc
 public class UserTest {
+
+    @Autowired
+    private UserDbRepository userDbRepository;
+
+    @Autowired
+    private MockMvc client;
+
+    @Test
+    public void should_register_user_successfully(){
+
+    }
+
+    @Test
+    public void should_return_token_when_login_user_successfully(){
+
+    }
 
     @Test
     void contextLoads() {
