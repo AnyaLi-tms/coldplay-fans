@@ -34,7 +34,10 @@ public class ConcertDbRepository implements ConcertRepository {
 
     @Override
     public void deleteConcert(Integer id) {
-        concertRepository.deleteById(id);
+        concertRepository.findById(id).ifPresent(concert -> {
+            concert.setDeleted(true);
+            concertRepository.save(concert);
+        });
     }
 
     @Override

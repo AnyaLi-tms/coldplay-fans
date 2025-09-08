@@ -25,6 +25,17 @@ public class Banner {
     @Column
     private Boolean status;
 
+    public Banner() {
+    }
+    
+    public Banner(String name, String imgUrl, String link, Boolean status) {
+        this.name = name;
+        this.imgUrl = imgUrl;
+        this.link = link;
+        this.status = status;
+        this.isDeleted = false;
+    }
+
     // Getters and setters
     public Integer getId() {
         return id;

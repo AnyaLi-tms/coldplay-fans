@@ -29,7 +29,11 @@ public class BannerDbRepository implements BannerRepository {
     }
     @Override
     public void deleteBanner(Integer id) {
-        bannerRepository.deleteById(id);
+        bannerRepository.findById(id).ifPresent(banner -> {
+            banner.setIsDeleted(true);
+            banner.setStatus(false);
+            bannerRepository.save(banner);
+        });
     }
     @Override
     public Banner updateBanner(Integer id, Banner updatedBanner) {

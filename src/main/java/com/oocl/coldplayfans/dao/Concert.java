@@ -43,7 +43,26 @@ public class Concert {
 
     private String imgUrl;
 
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
+
+
+    public Concert() {
+    }
+
+    public Concert(String name, Date startDate, Time startTime, String venue, String city, Date saleDate, Time saleTime, String description, String seatMapUrl, Status status, String imgUrl) {
+        this.name = name;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.venue = venue;
+        this.city = city;
+        this.saleDate = saleDate;
+        this.saleTime = saleTime;
+        this.description = description;
+        this.seatMapUrl = seatMapUrl;
+        this.status = status;
+        this.imgUrl = imgUrl;
+        this.isDeleted = false;
+    }
 
     // Getters and Setters
     public Integer getId() {
