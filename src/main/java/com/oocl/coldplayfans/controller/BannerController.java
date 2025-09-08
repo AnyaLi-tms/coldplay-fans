@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
-
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @RestController
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 @CrossOrigin
 public class BannerController {
 
-
+    @Autowired
     private BannerService bannerService;
 
     public BannerController(BannerService bannerService) {

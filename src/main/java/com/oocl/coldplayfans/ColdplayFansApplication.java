@@ -9,5 +9,4 @@ public class ColdplayFansApplication {
     public static void main(String[] args) {
         SpringApplication.run(ColdplayFansApplication.class, args);
     }
-
 }

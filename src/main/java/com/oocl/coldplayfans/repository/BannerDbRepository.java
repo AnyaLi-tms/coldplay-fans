@@ -1,16 +1,16 @@
-
 package com.oocl.coldplayfans.repository;
 import com.oocl.coldplayfans.dao.Banner;
 import java.util.List;
-import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
 public class BannerDbRepository implements BannerRepository {
 
-    JpaBannerRepository bannerRepository;
+    @Autowired
+    private JpaBannerRepository bannerRepository;
 
     public BannerDbRepository(JpaBannerRepository bannerRepository) {
         this.bannerRepository = bannerRepository;
@@ -33,18 +33,14 @@ public class BannerDbRepository implements BannerRepository {
     }
     @Override
     public Banner updateBanner(Integer id, Banner updatedBanner) {
-        Optional<Banner> optionalBanner = bannerRepository.findById(id);
-        if (optionalBanner.isPresent()) {
-            Banner existingBanner = optionalBanner.get();
+        return bannerRepository.findById(id).map(existingBanner -> {
             existingBanner.setName(updatedBanner.getName());
             existingBanner.setImgUrl(updatedBanner.getImgUrl());
             existingBanner.setLink(updatedBanner.getLink());
-            existingBanner.setIsDeleted(updatedBanner.getIsDeleted());
             existingBanner.setStatus(updatedBanner.getStatus());
+            existingBanner.setIsDeleted(updatedBanner.getIsDeleted());
             return bannerRepository.save(existingBanner);
-        } else {
-            return null; // Or throw an exception if preferred
-        }
+        }).orElse(null);
     }
     
 }

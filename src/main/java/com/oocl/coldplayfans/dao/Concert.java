@@ -1,77 +1,87 @@
 package com.oocl.coldplayfans.dao;
+import java.sql.Date;
+import java.sql.Time;
 import jakarta.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 
 
 @Entity
-@Table(name = "concerts")
+@Table(name = "concert")
 public class Concert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    private String name;
 
-    @Column(name = "start_time", nullable = false)
-    private LocalTime startTime;
+    private Date startDate;
 
-    @Column(name = "venue", nullable = false, length = 255)
+    private Time startTime;
+
     private String venue;
 
-    @Column(name = "city", nullable = false, length = 100)
     private String city;
 
-    @Column(name = "sale_date", nullable = false)
-    private LocalDate saleDate;
+    private Date saleDate;
 
-    @Column(name = "sale_time", nullable = false)
-    private LocalTime saleTime;
+    private Time saleTime;
 
-    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, columnDefinition = "ENUM('available', 'sold', 'cancelled','ended','unreleased') DEFAULT 'unreleased'")
-    private Status status;
-
-    @Column(name = "img_url", length = 2048)
-    private String imgUrl;
-
-    @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private String seatMapUrl;
 
     public enum Status {
-        AVAILABLE, SOLD, CANCELLED, ENDED, UNRELEASED
+        available,
+        sold,
+        cancelled,
+        ended,
+        unreleased
     }
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    private String imgUrl;
+
+    private Boolean isDeleted;
 
     // Getters and Setters
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
-    public LocalDate getStartDate() {
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getStartDate() {
         return startDate;
     }
-    public void setStartDate(LocalDate startDate) {
+
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalTime getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
-    public void setStartTime(LocalTime startTime) {
+
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
     public String getVenue() {
         return venue;
     }
+
     public void setVenue(String venue) {
         this.venue = venue;
     }
@@ -79,34 +89,47 @@ public class Concert {
     public String getCity() {
         return city;
     }
+
     public void setCity(String city) {
         this.city = city;
     }
 
-    public LocalDate getSaleDate() {
+    public Date getSaleDate() {
         return saleDate;
     }
-    public void setSaleDate(LocalDate saleDate) {
+
+    public void setSaleDate(Date saleDate) {
         this.saleDate = saleDate;
     }
 
-    public LocalTime getSaleTime() {
+    public Time getSaleTime() {
         return saleTime;
     }
-    public void setSaleTime(LocalTime saleTime) {
+
+    public void setSaleTime(Time saleTime) {
         this.saleTime = saleTime;
     }
 
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSeatMapUrl() {
+        return seatMapUrl;
+    }
+
+    public void setSeatMapUrl(String seatMapUrl) {
+        this.seatMapUrl = seatMapUrl;
     }
 
     public Status getStatus() {
         return status;
     }
+
     public void setStatus(Status status) {
         this.status = status;
     }
@@ -114,14 +137,17 @@ public class Concert {
     public String getImgUrl() {
         return imgUrl;
     }
+
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 
-    public Boolean getIsDeleted() {
+    public Boolean isDeleted() {
         return isDeleted;
     }
-    public void setIsDeleted(Boolean isDeleted) {
+
+    public void setDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+
 }
