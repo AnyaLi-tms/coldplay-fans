@@ -11,8 +11,8 @@ public class UserDbRepository implements UserRepository{
     JpaUserRepository jpaUserRepository;
 
     @Override
-    public User getUserByNameAndPassword(User user) {
-        return jpaUserRepository.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
+    public User getUserByName(User user) {
+        return jpaUserRepository.findUserByUsername(user.getUsername());
     }
 
     @Override

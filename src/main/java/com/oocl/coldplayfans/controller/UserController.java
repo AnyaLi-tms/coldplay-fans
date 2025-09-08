@@ -1,6 +1,8 @@
 package com.oocl.coldplayfans.controller;
 
 import com.oocl.coldplayfans.dao.User;
+import com.oocl.coldplayfans.dto.UserResponse;
+import com.oocl.coldplayfans.dto.mapper.UserMapper;
 import com.oocl.coldplayfans.service.UserService;
 import com.oocl.coldplayfans.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +23,6 @@ public class UserController {
 
     @GetMapping("/login")
     public Map<String, Object> login(@RequestBody User user){
-        // Todo: 存储密码为加密串
         Map<String, Object> map = new HashMap<>();
         try{
             User login = userService.login(user);
@@ -33,7 +34,7 @@ public class UserController {
 
             map.put("status", true);
             map.put("msg", "登录成功");
-            map.put("token", token); // 响应token，存储在客户端
+            map.put("token", token);
         }catch (Exception e) {
             map.put("status", false);
             map.put("msg", "登录失败");
@@ -42,8 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody User user){
-        // Todo:返回不带密码字段，UserResponseDTO
-        return userService.register(user);
+    public UserResponse register(@RequestBody User user){
+        return new UserMapper().toResponse(userService.register(user));
     }
 }

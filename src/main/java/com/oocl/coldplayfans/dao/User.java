@@ -28,6 +28,9 @@ public class User {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
+    @Column(name = "salt")
+    private String salt;
+
     public User() {
     }
 
@@ -95,5 +98,13 @@ public class User {
 
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }
