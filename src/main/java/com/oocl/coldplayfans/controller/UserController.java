@@ -8,6 +8,9 @@ import com.oocl.coldplayfans.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -22,7 +25,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody User user) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
         try {
             User login = userService.login(user);
@@ -34,25 +37,27 @@ public class UserController {
             map.put("status", true);
             map.put("msg", "登录成功");
             map.put("token", token);
+            return ResponseEntity.ok(map);
         } catch (Exception e) {
             map.put("status", false);
             map.put("msg", e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
         }
-        return map;
     }
 
     @PostMapping("/register")
-    public Map<String, Object> register(@RequestBody User user) {
+    public ResponseEntity<Map<String, Object>> register(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
         try {
             UserResponse userResponse = new UserMapper().toResponse(userService.register(user));
             map.put("userReponse", userResponse);
             map.put("msg", "注册成功");
+            return ResponseEntity.ok(map);
         } catch (Exception e) {
             map.put("status", false);
             map.put("msg", e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(map);
         }
-        return map;
     }
 
 }
