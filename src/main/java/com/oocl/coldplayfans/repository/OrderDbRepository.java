@@ -36,6 +36,7 @@ public class OrderDbRepository implements OrderRepository {
         return jpaOrderRepository.findById(id).map(existingOrder -> {
             existingOrder.setStatus(order.getStatus());
             existingOrder.setIsDeleted(order.getIsDeleted());
+            existingOrder.setAddress(order.getAddress());
             return jpaOrderRepository.save(existingOrder);
         }).orElse(null);
     }

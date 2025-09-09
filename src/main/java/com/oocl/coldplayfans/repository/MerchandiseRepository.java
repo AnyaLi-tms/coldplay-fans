@@ -9,4 +9,5 @@ public interface MerchandiseRepository {
     Merchandise saveMerchandise(Merchandise merchandise);
     void deleteMerchandise(Integer id);
     Merchandise updateMerchandise(Integer id, Merchandise updatedMerchandise);
+    List<Merchandise> getMerchandiseByOrderId(Integer orderId);
 }

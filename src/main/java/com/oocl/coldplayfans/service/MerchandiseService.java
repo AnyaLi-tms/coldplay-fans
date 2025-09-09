@@ -34,6 +34,9 @@ public class MerchandiseService {
     public Merchandise updateMerchandise(Integer id, Merchandise updatedMerchandise) {
         return merchandiseDbRepository.updateMerchandise(id, updatedMerchandise);
     }
+    public List<Merchandise> getMerchandiseByOrderId(Integer orderId) {
+        return merchandiseDbRepository.getMerchandiseByOrderId(orderId);
+    }
     
 
 }

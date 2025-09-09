@@ -20,13 +20,19 @@ public class Order {
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted = false;
 
+    @Column(name = "address")
+    private String address;
+
+    
+
     //Constructors
     public Order() {
     }
 
-    public Order(String itemType) {
+    public Order(String itemType, String address) {
         this.itemType = itemType;
         this.status = "active";
+        this.address = address;
     }
 
     // Getters and Setters
@@ -60,5 +66,11 @@ public class Order {
 
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

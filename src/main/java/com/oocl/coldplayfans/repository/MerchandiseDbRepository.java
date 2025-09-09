@@ -50,4 +50,9 @@ public class MerchandiseDbRepository implements MerchandiseRepository {
             return MerchandiseRepository.save(existingMerchandise);
         }).orElse(null);
     }
+
+    @Override
+    public List<Merchandise> getMerchandiseByOrderId(Integer orderId) {
+        return MerchandiseRepository.findByOrderId(orderId);
+    }
 }
