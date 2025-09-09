@@ -40,10 +40,14 @@ public class MerchandiseDbRepository implements MerchandiseRepository {
 
     @Override
     public Merchandise updateMerchandise(Integer id, Merchandise updatedMerchandise) {
-        if (MerchandiseRepository.existsById(id)) {
-            updatedMerchandise.setId(id);
-            return MerchandiseRepository.save(updatedMerchandise);
-        }
-        return null;
+        return MerchandiseRepository.findById(id).map(existingMerchandise -> {
+            existingMerchandise.setName(updatedMerchandise.getName());
+            existingMerchandise.setDescription(updatedMerchandise.getDescription());
+            existingMerchandise.setPrice(updatedMerchandise.getPrice());
+            existingMerchandise.setImgUrl(updatedMerchandise.getImgUrl());
+            existingMerchandise.setStatus(updatedMerchandise.getStatus());
+            existingMerchandise.setIsDeleted(updatedMerchandise.getIsDeleted());
+            return MerchandiseRepository.save(existingMerchandise);
+        }).orElse(null);
     }
 }
