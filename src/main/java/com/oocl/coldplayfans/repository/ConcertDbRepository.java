@@ -5,6 +5,7 @@ import com.oocl.coldplayfans.dao.Concert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Date;
 
 
 @Repository
@@ -20,6 +21,11 @@ public class ConcertDbRepository implements ConcertRepository {
     @Override
     public List<Concert> getAllConcerts() {
         return concertRepository.findAll();
+    }
+
+    @Override
+    public List<Concert> getConcertsByDate(String city, Date startDate, Date endDate) {
+        return concertRepository.findConcertsByDate(city, startDate, endDate);
     }
 
     @Override
@@ -56,6 +62,11 @@ public class ConcertDbRepository implements ConcertRepository {
             existingConcert.setImgUrl(updatedConcert.getImgUrl());
             return concertRepository.save(existingConcert);
         }).orElse(null);
+    }
+
+    @Override
+    public List<String> getAllCities() {
+        return concertRepository.findDistinctCities();
     }
 
 }

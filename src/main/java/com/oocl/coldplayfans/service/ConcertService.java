@@ -20,26 +20,11 @@ public class ConcertService {
     }
 
     public List<Concert> getAllConcerts(Date startDate, Date endDate, String city) {
-        List<Concert> concerts = concertDbRepository.getAllConcerts();
-        if (city != null && !city.isEmpty()) {
-            concerts.removeIf(concert -> !concert.getCity().equalsIgnoreCase(city));
-        }
-        if (startDate != null) {
-            concerts.removeIf(concert -> concert.getStartDate().before(startDate));
-        }
-        if (endDate != null) {
-            concerts.removeIf(concert -> concert.getStartDate().after(endDate));
-        }
-        List<Concert> upcomingConcerts = new java.util.ArrayList<>();
-        for (Concert concert : concerts) {
-            if (concert.getStatus() != Concert.Status.ended && concert.getStatus() != Concert.Status.cancelled) {
-                upcomingConcerts.add(concert);
-            }
-        }
-        upcomingConcerts.sort((java.util.Comparator.comparing(Concert::getStartDate).thenComparing(Concert::getStartTime)));
-        return upcomingConcerts;
+        return concertDbRepository.getConcertsByDate(city, startDate, endDate).stream()
+            .sorted(java.util.Comparator.comparing(Concert::getStartDate)
+            .thenComparing(Concert::getStartTime))
+            .toList();
     }
-
 
     public Concert getConcertById(Integer id) {
         return concertDbRepository.getConcertById(id);
@@ -58,14 +43,7 @@ public class ConcertService {
     }
 
     public List<String> getAllCities() {
-        List<Concert> concerts = concertDbRepository.getAllConcerts();
-        java.util.Set<String> citySet = new java.util.HashSet<>();
-        for (Concert concert : concerts) {
-            citySet.add(concert.getCity());
-        }
-        List<String> cities = new java.util.ArrayList<>(citySet);
-        java.util.Collections.sort(cities);
-        return cities;
+        return concertDbRepository.getAllCities();
     }
 
 }
