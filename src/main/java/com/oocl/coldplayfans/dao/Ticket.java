@@ -119,4 +119,18 @@ public class Ticket {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", concert=" + concertId +
+                ", idNumber='" + idNumber + '\'' +
+                ", userId=" + userId +
+                ", seatNumber='" + seatNumber + '\'' +
+                ", seatArea='" + seatArea + '\'' +
+                ", price=" + price +
+                ", purchaseDate=" + purchaseDate +
+                '}';
+    }
 }

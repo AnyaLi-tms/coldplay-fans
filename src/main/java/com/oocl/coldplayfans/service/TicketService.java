@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +28,7 @@ public class TicketService {
                 .map(areaTickets -> {
                     Price price = new Price();
                     price.setPrice(areaTickets.getFirst().getPrice());
+                    price.setSeatArea(areaTickets.getFirst().getSeatArea());
                     long remainCount = areaTickets.stream()
                             .filter(ticket -> ticket.getUserId() == null)
                             .count();
@@ -51,6 +55,8 @@ public class TicketService {
             Ticket ticket = tickets.get(i);
             ticket.setUserId(userId);
             ticket.setIdNumber(idNums.get(i));
+            LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Shanghai"));
+            ticket.setPurchaseDate(now);
         }
         return ticketDbRepository.saveAll(tickets);
     }

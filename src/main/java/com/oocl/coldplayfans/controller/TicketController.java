@@ -61,8 +61,11 @@ public class TicketController {
             successMap.put("status", "true");
             return ResponseEntity.ok(successMap);
         } catch (Exception e) {
+            Map<String, String> errMap = new HashMap<>();
+            errMap.put("msg", "购票失败：" + e.getMessage());
+            errMap.put("status", "false");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("购票失败：" + e.getMessage());
+                    .body(errMap);
         }
     }
 
