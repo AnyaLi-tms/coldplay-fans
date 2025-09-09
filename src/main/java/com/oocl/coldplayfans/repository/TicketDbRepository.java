@@ -16,8 +16,8 @@ public class TicketDbRepository {
         return jpaTicketRepository.findTicketsByConcertId(concertId);
     }
 
-    public List<Ticket> findTicketByIdNumsAndConcertId(Integer concertId, List<String> idNums, String seatArea) {
-        return jpaTicketRepository.findByConcertIdAndSeatAreaAndIdNumberIn(concertId, seatArea, idNums);
+    public List<Ticket> findTicketByIdNumsAndConcertId(Integer concertId, List<String> idNums) {
+        return jpaTicketRepository.findByConcertIdAndIdNumberIn(concertId, idNums);
     }
 
     public List<Ticket> findEmptyIdNumberWithLock(Integer concertId, String seatArea, Integer count) {

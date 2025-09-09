@@ -13,9 +13,8 @@ import java.util.List;
 public interface JpaTicketRepository extends JpaRepository<Ticket, Integer> {
     List<Ticket> findTicketsByConcertId(Integer concertId);
 
-    List<Ticket> findByConcertIdAndSeatAreaAndIdNumberIn(
+    List<Ticket> findByConcertIdAndIdNumberIn(
             Integer concertId,
-            String seatArea,
             List<String> idNumbers
     );
 

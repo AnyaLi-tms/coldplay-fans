@@ -46,7 +46,7 @@ public class TicketController {
                 return ResponseEntity.badRequest().body("seatArea不能为空");
             }
             Integer userId = Integer.parseInt((String) request.getAttribute("userId"));
-            List<Ticket> existingTickets = ticketService.findTicketByIdNumsAndConcertId(concertId, idNums, seatArea);
+            List<Ticket> existingTickets = ticketService.findTicketByIdNumsAndConcertId(concertId, idNums);
             if (!existingTickets.isEmpty()) {
                 Map<String, String> errMap = new HashMap<>();
                 errMap.put("msg", "对不起，您所选的观演人已购买过同一时间的演出");

@@ -41,8 +41,8 @@ public class TicketService {
         return response;
     }
 
-    public List<Ticket> findTicketByIdNumsAndConcertId(Integer concertId, List<String> idNums, String seatArea) {
-        return ticketDbRepository.findTicketByIdNumsAndConcertId(concertId, idNums, seatArea);
+    public List<Ticket> findTicketByIdNumsAndConcertId(Integer concertId, List<String> idNums) {
+        return ticketDbRepository.findTicketByIdNumsAndConcertId(concertId, idNums);
     }
 
     @Transactional(rollbackFor = Exception.class)
