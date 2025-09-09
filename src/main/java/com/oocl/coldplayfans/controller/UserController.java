@@ -52,7 +52,7 @@ public class UserController {
             UserResponse userResponse = new UserMapper().toResponse(userService.register(user));
             map.put("userReponse", userResponse);
             map.put("msg", "注册成功");
-            return ResponseEntity.ok(map);
+            return ResponseEntity.status(HttpStatus.CREATED).body(map);
         } catch (Exception e) {
             map.put("status", false);
             map.put("msg", e.getMessage());
