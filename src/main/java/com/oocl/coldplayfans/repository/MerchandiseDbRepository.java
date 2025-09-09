@@ -11,48 +11,48 @@ import java.util.List;
 public class MerchandiseDbRepository implements MerchandiseRepository {
 
     @Autowired
-    private JpaMerchandiseRepository MerchandiseRepository;
+    private JpaMerchandiseRepository jpaMerchandiseRepository;
 
     public MerchandiseDbRepository(JpaMerchandiseRepository jpaMerchandiseRepository) {
-        this.MerchandiseRepository = jpaMerchandiseRepository;
+        this.jpaMerchandiseRepository = jpaMerchandiseRepository;
     }
 
 
     @Override
     public List<Merchandise> getAllMerchandise() {
-        return MerchandiseRepository.findAll();
+        return jpaMerchandiseRepository.findAll();
     }
 
     @Override
     public Merchandise getMerchandiseById(Integer id) {
-        return MerchandiseRepository.findById(id).orElse(null);
+        return jpaMerchandiseRepository.findById(id).orElse(null);
     }
 
     @Override
     public Merchandise saveMerchandise(Merchandise merchandise) {
-        return MerchandiseRepository.save(merchandise);
+        return jpaMerchandiseRepository.save(merchandise);
     }
 
     @Override
     public void deleteMerchandise(Integer id) {
-        MerchandiseRepository.deleteById(id);
+        jpaMerchandiseRepository.deleteById(id);
     }
 
     @Override
     public Merchandise updateMerchandise(Integer id, Merchandise updatedMerchandise) {
-        return MerchandiseRepository.findById(id).map(existingMerchandise -> {
+        return jpaMerchandiseRepository.findById(id).map(existingMerchandise -> {
             existingMerchandise.setName(updatedMerchandise.getName());
             existingMerchandise.setDescription(updatedMerchandise.getDescription());
             existingMerchandise.setPrice(updatedMerchandise.getPrice());
             existingMerchandise.setImgUrl(updatedMerchandise.getImgUrl());
             existingMerchandise.setStatus(updatedMerchandise.getStatus());
             existingMerchandise.setIsDeleted(updatedMerchandise.getIsDeleted());
-            return MerchandiseRepository.save(existingMerchandise);
+            return jpaMerchandiseRepository.save(existingMerchandise);
         }).orElse(null);
     }
 
     @Override
     public List<Merchandise> getMerchandiseByOrderId(Integer orderId) {
-        return MerchandiseRepository.findByOrderId(orderId);
+        return jpaMerchandiseRepository.findByOrderId(orderId);
     }
 }

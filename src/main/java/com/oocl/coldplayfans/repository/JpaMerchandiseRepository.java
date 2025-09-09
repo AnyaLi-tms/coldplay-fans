@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface JpaMerchandiseRepository extends JpaRepository<Merchandise, Integer> {
-    @Query("SELECT m FROM Merchandise m WHERE m.isDeleted = false" + " AND m.orderId = :orderId")
+    @Query("SELECT m FROM Merchandise m WHERE m.isDeleted = false" + " AND m.order.id = :orderId")
     List<Merchandise> findByOrderId(Integer orderId);
 }

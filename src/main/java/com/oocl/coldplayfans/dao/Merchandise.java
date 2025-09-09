@@ -11,7 +11,7 @@ public class Merchandise {
     private Integer id;
 
     private String name;
-
+    
     @Column(name = "user_id")
     private Integer userId;
 
@@ -25,8 +25,9 @@ public class Merchandise {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
-    @Column(name = "order_id")
-    private Integer orderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     @Column(name = "img_url")
     private String imgUrl;
@@ -47,14 +48,13 @@ public class Merchandise {
         this.description = description;
     }
 
-    public Merchandise(String name, Integer userId, Double price, LocalDateTime purchaseDate, Integer orderId, String imgUrl, String description) {
+    public Merchandise(String name, Integer userId, Double price, LocalDateTime purchaseDate, String imgUrl, String description) {
         this.name = name;
         this.userId = userId;
         this.price = price;
         this.purchaseDate = purchaseDate;
         this.status = "purchased";
         this.isDeleted = false;
-        this.orderId = orderId;
         this.imgUrl = imgUrl;
         this.description = description;
     }
@@ -116,13 +116,11 @@ public class Merchandise {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
-
-    public Integer getOrderId() {
-        return orderId;
+    public Order getOrder() {
+        return order;
     }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public String getImgUrl() {
