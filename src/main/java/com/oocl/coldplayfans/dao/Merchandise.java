@@ -1,9 +1,12 @@
 package com.oocl.coldplayfans.dao;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "merchandise")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Merchandise {
 
     @Id
@@ -26,6 +29,7 @@ public class Merchandise {
     private Boolean isDeleted;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "order_id")
     private Order order;
 

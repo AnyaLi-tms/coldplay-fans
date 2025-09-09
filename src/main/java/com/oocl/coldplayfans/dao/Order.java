@@ -11,6 +11,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    
     @Column(name = "item_type", nullable = false)
     private String itemType;
 
