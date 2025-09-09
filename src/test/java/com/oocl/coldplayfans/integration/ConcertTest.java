@@ -39,17 +39,17 @@ public class ConcertTest {
 
     @Test
     public void should_return_concerts_when_get_all_concerts_exist() throws Exception {
-        List<Concert> givenConcerts = concertRepository.getAllConcerts();
+        List<Concert> givenConcerts = concertRepository.getConcertsByDate(null, null, null);
 
         ResultActions perform = client.perform(MockMvcRequestBuilders.get("/concerts"));
 
         perform.andExpect(MockMvcResultMatchers.status().isOk());
-        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].id").value(givenConcerts.get(3).getId()));
-        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value(givenConcerts.get(3).getName()));
-        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].imgUrl").value(givenConcerts.get(3).getImgUrl()));
-        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].city").value(givenConcerts.get(3).getCity()));
-        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].status").value(givenConcerts.get(3).getStatus().toString()));
-        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].deleted").value(givenConcerts.get(3).isDeleted()));
+        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].id").value(givenConcerts.get(0).getId()));
+        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value(givenConcerts.get(0).getName()));
+        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].imgUrl").value(givenConcerts.get(0).getImgUrl()));
+        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].city").value(givenConcerts.get(0).getCity()));
+        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].status").value(givenConcerts.get(0).getStatus().toString()));
+        perform.andExpect(MockMvcResultMatchers.jsonPath("$.[0].deleted").value(givenConcerts.get(0).isDeleted()));
 
     }
 
@@ -69,28 +69,26 @@ public class ConcertTest {
     }
 
 
-    // @Test
-    // public void post_concert_should_create_successfully() throws Exception {
-    //     List<Concert> givenConcerts = concertRepository.getAllConcerts();
-    //     Concert newConcert = new Concert("Concert4", Date.valueOf("2010-08-01"), Time.valueOf("20:00:00"), "Wembley Stadium", "London", Date.valueOf("2025-07-01"), Time.valueOf("10:00:00"), "Description for Concert4", "https://www.coldplay.com/concert4/seatmap", Concert.Status.available, "https://www.coldplay.com/concert4.jpg");
-    //     givenConcerts.add(newConcert);
+    @Test
+    public void post_concert_should_create_successfully() throws Exception {
+        Concert newConcert = new Concert("Concert4", Date.valueOf("2010-08-01"), Time.valueOf("20:00:00"), "Wembley Stadium", "London", Date.valueOf("2025-07-01"), Time.valueOf("10:00:00"), "Description for Concert4", "https://www.coldplay.com/concert4/seatmap", Concert.Status.available, "https://www.coldplay.com/concert4.jpg");
+        
+        ObjectMapper objectMapper = new ObjectMapper();
 
-    //     ObjectMapper objectMapper = new ObjectMapper();
+        ResultActions perform = client.perform(MockMvcRequestBuilders
+                        .post("/concerts")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(newConcert)));
+        perform.andExpect(MockMvcResultMatchers.status().isCreated());
 
-    //     ResultActions perform = client.perform(MockMvcRequestBuilders
-    //                     .post("/concerts")
-    //                     .contentType(MediaType.APPLICATION_JSON)
-    //                     .content(objectMapper.writeValueAsString(newConcert)));
-    //     perform.andExpect(MockMvcResultMatchers.status().isCreated());
-
-    //     ResultActions perform_second = client.perform(MockMvcRequestBuilders.get("/concerts"));
-    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value(newConcert.getName()));
-    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].imgUrl").value(newConcert.getImgUrl()));
-    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].status").value(newConcert.getStatus().toString()));
-    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].city").value(newConcert.getCity()));
-    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].deleted").value(newConcert.isDeleted()));
-    //     client.perform(MockMvcRequestBuilders.delete("/concerts/1"));
-    // }
+        ResultActions perform_second = client.perform(MockMvcRequestBuilders.get("/concerts"));
+        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value(newConcert.getName()));
+        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].imgUrl").value(newConcert.getImgUrl()));
+        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].status").value(newConcert.getStatus().toString()));
+        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].city").value(newConcert.getCity()));
+        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].deleted").value(newConcert.isDeleted()));
+        
+    }
 
     @Test
     public void delete_concert_by_id_successful() throws Exception {
