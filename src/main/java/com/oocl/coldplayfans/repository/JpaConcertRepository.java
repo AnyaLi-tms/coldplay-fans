@@ -17,7 +17,7 @@ public interface JpaConcertRepository extends JpaRepository<Concert, Integer> {
     @Query("SELECT c FROM Concert c WHERE (:city IS NULL OR LOWER(c.city) = LOWER(:city)) " +
         "AND (:startDate IS NULL OR c.startDate >= :startDate) " +
         "AND (:endDate IS NULL OR c.startDate <= :endDate) " +
-        "AND c.status NOT IN ('ended', 'cancelled')")
+        "AND c.status NOT IN ('ended', 'cancelled') order by c.startDate ASC")
     List<Concert> findConcertsByDate(String city, Date startDate, Date endDate);
 }
 

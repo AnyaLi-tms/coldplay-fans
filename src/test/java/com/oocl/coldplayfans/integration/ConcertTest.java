@@ -72,7 +72,7 @@ public class ConcertTest {
     // @Test
     // public void post_concert_should_create_successfully() throws Exception {
     //     List<Concert> givenConcerts = concertRepository.getAllConcerts();
-    //     Concert newConcert = new Concert("Concert4", Date.valueOf("2030-08-01"), Time.valueOf("20:00:00"), "Wembley Stadium", "London", Date.valueOf("2025-07-01"), Time.valueOf("10:00:00"), "Description for Concert4", "https://www.coldplay.com/concert4/seatmap", Concert.Status.available, "https://www.coldplay.com/concert4.jpg");
+    //     Concert newConcert = new Concert("Concert4", Date.valueOf("2010-08-01"), Time.valueOf("20:00:00"), "Wembley Stadium", "London", Date.valueOf("2025-07-01"), Time.valueOf("10:00:00"), "Description for Concert4", "https://www.coldplay.com/concert4/seatmap", Concert.Status.available, "https://www.coldplay.com/concert4.jpg");
     //     givenConcerts.add(newConcert);
 
     //     ObjectMapper objectMapper = new ObjectMapper();
@@ -89,6 +89,7 @@ public class ConcertTest {
     //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].status").value(newConcert.getStatus().toString()));
     //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].city").value(newConcert.getCity()));
     //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.[0].deleted").value(newConcert.isDeleted()));
+    //     client.perform(MockMvcRequestBuilders.delete("/concerts/1"));
     // }
 
     @Test

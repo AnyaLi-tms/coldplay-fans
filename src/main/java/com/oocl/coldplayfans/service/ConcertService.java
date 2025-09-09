@@ -20,10 +20,7 @@ public class ConcertService {
     }
 
     public List<Concert> getAllConcerts(Date startDate, Date endDate, String city) {
-        return concertDbRepository.getConcertsByDate(city, startDate, endDate).stream()
-            .sorted(java.util.Comparator.comparing(Concert::getStartDate)
-            .thenComparing(Concert::getStartTime))
-            .toList();
+        return concertDbRepository.getConcertsByDate(city, startDate, endDate);
     }
 
     public Concert getConcertById(Integer id) {
