@@ -39,7 +39,10 @@ public class Ticket {
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted = false;
 
-    // Getters and Setters
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "concert_id", insertable = false, updatable = false)
+    private Concert concert;
+
     public Integer getId() {
         return id;
     }
@@ -124,7 +127,7 @@ public class Ticket {
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
-                ", concert=" + concertId +
+                ", concert=" + concert.getName() +
                 ", idNumber='" + idNumber + '\'' +
                 ", userId=" + userId +
                 ", seatNumber='" + seatNumber + '\'' +
