@@ -71,7 +71,7 @@ public class ConcertTest {
 
     @Test
     public void post_concert_should_create_successfully() throws Exception {
-        Concert newConcert = new Concert("Concert4", Date.valueOf("2010-08-01"), Time.valueOf("20:00:00"), "Wembley Stadium", "London", Date.valueOf("2025-07-01"), Time.valueOf("10:00:00"), "Description for Concert4", "https://www.coldplay.com/concert4/seatmap", Concert.Status.available, "https://www.coldplay.com/concert4.jpg");
+        Concert newConcert = new Concert("Concert4", Date.valueOf("2025-09-14"), Time.valueOf("20:00:00"), "Wembley Stadium", "London", Date.valueOf("2025-07-01"), Time.valueOf("10:00:00"), "Description for Concert4", "https://www.coldplay.com/concert4/seatmap", Concert.Status.available, "https://www.coldplay.com/concert4.jpg");
         
         ObjectMapper objectMapper = new ObjectMapper();
 

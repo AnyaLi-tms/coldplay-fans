@@ -1,6 +1,8 @@
 package com.oocl.coldplayfans.service;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ public class ConcertService {
     }
 
     public List<Concert> getAllConcerts(Date startDate, Date endDate, String city) {
+        updateStatus();
         return concertDbRepository.getConcertsByDate(city, startDate, endDate);
     }
 
@@ -41,6 +44,19 @@ public class ConcertService {
 
     public List<String> getAllCities() {
         return concertDbRepository.getAllCities();
+    }
+
+    public List<Concert> updateStatus() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Shanghai"));
+        List<Concert> concerts = concertDbRepository.getAllConcerts();
+        for (Concert concert : concerts) {
+            if (concert.getStartDate().toLocalDate().isBefore(now.toLocalDate())) {
+                concert.setStatus(Concert.Status.ended);
+                concertDbRepository.updateConcert(concert.getId(), concert);
+            }
+        }
+
+        return concerts;
     }
 
 }
