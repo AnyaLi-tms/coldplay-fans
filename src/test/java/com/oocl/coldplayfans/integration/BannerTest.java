@@ -104,7 +104,7 @@ public class BannerTest {
 
     @Test
     public void put_banner_by_id_successful() throws Exception {
-        Banner newBanner = new Banner("Updated Banner", "https://www.coldplay.com/wp/wp-content/uploads/2025/08/updated-banner.webp", "https://www.coldplay.com/updated-banner", true);
+        Banner newBanner = new Banner("Updated Banner", "https://www.coldplay.com/wp/wp-content/uploads/2025/08/new-dates.webp", "https://www.coldplay.com/7th-and-8th-september-wembley-shows-to-be-rescheduled/", true);
 
         ObjectMapper objectMapper = new ObjectMapper();
         ResultActions perform = client.perform(MockMvcRequestBuilders
