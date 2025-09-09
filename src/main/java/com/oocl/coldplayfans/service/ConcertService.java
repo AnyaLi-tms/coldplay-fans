@@ -54,6 +54,15 @@ public class ConcertService {
                 concert.setStatus(Concert.Status.ended);
                 concertDbRepository.updateConcert(concert.getId(), concert);
             }
+            if (concert.getStartDate().toLocalDate().isAfter(now.toLocalDate())) {
+                if (java.time.temporal.ChronoUnit.DAYS.between(now.toLocalDate(), concert.getStartDate().toLocalDate()) <= 30 && concert.getStatus() != Concert.Status.sold && concert.getStatus() != Concert.Status.cancelled) {
+                    concert.setStatus(Concert.Status.available);
+                    concertDbRepository.updateConcert(concert.getId(), concert);
+                } else {
+                    concert.setStatus(Concert.Status.unreleased);
+                    concertDbRepository.updateConcert(concert.getId(), concert);
+                }
+            }
         }
 
         return concerts;
