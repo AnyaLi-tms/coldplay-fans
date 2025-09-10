@@ -1,6 +1,5 @@
 package com.oocl.coldplayfans.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.oocl.coldplayfans.dao.Merchandise;
-import com.oocl.coldplayfans.dto.UserTicketOrderReponse;
 import com.oocl.coldplayfans.dto.UserMerchandiseResponse;
 import com.oocl.coldplayfans.service.MerchandiseService;
 
@@ -28,9 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
-
-
-
 @RestController
 @RequestMapping("/merchandises")
 @CrossOrigin
@@ -40,7 +35,7 @@ public class MerchandiseController {
 
     public MerchandiseController(MerchandiseService merchandiseService) {
         this.merchandiseService = merchandiseService;
-    }   
+    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -51,7 +46,7 @@ public class MerchandiseController {
         return merchandiseService.getAllMerchandise();
     }
 
-    
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Merchandise getMerchandiseById(@PathVariable Integer id) {
@@ -72,11 +67,10 @@ public class MerchandiseController {
         if (inStockMerchandises.size() < quantity) {
             throw new RuntimeException("库存不足，请重试");
         }
-        
+
         return inStockMerchandises;
     }
-    
-    
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -119,10 +113,9 @@ public class MerchandiseController {
     }
 
     @GetMapping("/myMerchandise")
-    public List<UserMerchandiseResponse> loadMerchandiseOrders(HttpServletRequest request){
+    public List<UserMerchandiseResponse> loadMerchandiseOrders(HttpServletRequest request) {
         return merchandiseService.loadMerchandiseOrders(Integer.parseInt((String) request.getAttribute("userId")));
     }
 
-    
-    
+
 }

@@ -24,7 +24,7 @@ public class QuestionController {
     }
 
     @PostMapping
-    public Boolean validateAnswers(List<AnswerRequest> answers){
+    public Boolean validateAnswers(@RequestBody List<AnswerRequest> answers){
         return questionService.validateAnswers(answers);
     }
 }

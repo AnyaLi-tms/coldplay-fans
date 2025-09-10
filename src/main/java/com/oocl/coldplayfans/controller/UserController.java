@@ -5,11 +5,8 @@ import com.oocl.coldplayfans.dto.UserResponse;
 import com.oocl.coldplayfans.dto.mapper.UserMapper;
 import com.oocl.coldplayfans.service.UserService;
 import com.oocl.coldplayfans.util.JwtUtil;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

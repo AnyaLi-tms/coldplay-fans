@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -26,7 +24,6 @@ public class QuestionService {
         List<Question> questionList = questionDBRepository.generateQuestion();
         List<QuestionResponse> questionResponseList = new ArrayList<>();
         for (Question question : questionList) {
-//            List<String> optionList = Arrays.stream(question.getOptions().split("\\|")).collect(Collectors.toList());
             List<Option> options = OptionSplitterUtil.splitOptions(question.getOptions());
             QuestionResponse questionResponse = new QuestionResponse(question.getId(), options, question.getQuestionText());
             questionResponseList.add(questionResponse);
@@ -35,10 +32,11 @@ public class QuestionService {
     }
 
     public Boolean validateAnswers(List<AnswerRequest> answers) {
-        return answers.stream()
-                .allMatch(answer -> {
+        boolean hasWrongAnswer = answers.stream()
+                .anyMatch(answer -> {
                     Question question = questionDBRepository.findById(answer.getQuestionId());
-                    return question != null && Objects.equals(answer.getAnswer(), question.getAnswer());
+                    return !Objects.equals(answer.getAnswer(), question.getAnswer());
                 });
+        return !hasWrongAnswer;
     }
 }
