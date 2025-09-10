@@ -1,8 +1,13 @@
 package com.oocl.coldplayfans.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.oocl.coldplayfans.dao.Merchandise;
+import com.oocl.coldplayfans.dto.UserTicketOrderReponse;
+import com.oocl.coldplayfans.dto.UserMerchandiseResponse;
 import com.oocl.coldplayfans.service.MerchandiseService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +58,26 @@ public class MerchandiseController {
         return merchandiseService.getMerchandiseById(id);
     }
 
+    @GetMapping("/order/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Merchandise> getMerchandiseByOrderId(@PathVariable Integer id) {
+        return merchandiseService.getMerchandiseByOrderId(id);
+    }
+
+    @GetMapping("/instock")
+    public List<Merchandise> getInStockMerchandise(@RequestBody Map<String, Object> map) {
+        Integer quantity = (Integer) map.get("quantity");
+        String name = (String) map.get("name");
+        List<Merchandise> inStockMerchandises = merchandiseService.getInStockMerchandises(name);
+        if (inStockMerchandises.size() < quantity) {
+            throw new RuntimeException("库存不足，请重试");
+        }
+        
+        return inStockMerchandises;
+    }
+    
+    
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMerchandise(@PathVariable Integer id) {
@@ -65,5 +95,34 @@ public class MerchandiseController {
         return merchandiseService.updateMerchandise(id, merchandise);
     }
 
+
+    @PutMapping("/buyMerchandise")
+    public ResponseEntity<?> buyMerchandise(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+        try {
+            Integer userId = Integer.parseInt((String) request.getAttribute("userId"));
+            Integer quantity = (Integer) map.get("quantity");
+            String name = (String) map.get("name");
+            String address = (String) map.get("address");
+            List<Merchandise> merchandises = merchandiseService.buyMerchandises(userId, quantity, name, address);
+            Map<String, String> successMap = new HashMap<>();
+            successMap.put("msg", "购买周边成功");
+            successMap.put("merchandises", merchandises.toString());
+            successMap.put("status", "true");
+            return ResponseEntity.ok(successMap);
+        } catch (Exception e) {
+            Map<String, String> errMap = new HashMap<>();
+            errMap.put("msg", "购买周边失败：" + e.getMessage());
+            errMap.put("status", "false");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(errMap);
+        }
+    }
+
+    @GetMapping("/myMerchandise")
+    public List<UserMerchandiseResponse> loadMerchandiseOrders(HttpServletRequest request){
+        return merchandiseService.loadMerchandiseOrders(Integer.parseInt((String) request.getAttribute("userId")));
+    }
+
+    
     
 }

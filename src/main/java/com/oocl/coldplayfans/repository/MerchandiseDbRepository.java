@@ -55,4 +55,14 @@ public class MerchandiseDbRepository implements MerchandiseRepository {
     public List<Merchandise> getMerchandiseByOrderId(Integer orderId) {
         return jpaMerchandiseRepository.findByOrderId(orderId);
     }
+
+    @Override
+    public List<Merchandise> findInStockMerchandises(String name) {
+        return jpaMerchandiseRepository.findInStockMerchandises(name);
+    }
+
+    @Override
+    public List<Merchandise> getMerchandiseByUserId(Integer userId) {
+        return jpaMerchandiseRepository.findByUserId(userId);
+    }
 }

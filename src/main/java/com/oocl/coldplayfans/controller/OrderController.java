@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 
+
 @RestController
 @RequestMapping("/orders")
 @CrossOrigin
@@ -41,6 +42,11 @@ public class OrderController {
         return orderService.getOrderById(id);
     }
 
+    @GetMapping("/type/{itemType}")
+    public List<Order> getOrdersByItemType(@PathVariable String itemType) {
+        return orderService.getOrdersByItemType(itemType);
+    }
+    
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOrder(@PathVariable Integer id) {

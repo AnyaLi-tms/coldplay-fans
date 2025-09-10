@@ -3,9 +3,7 @@ package com.oocl.coldplayfans.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.oocl.coldplayfans.dao.Merchandise;
 import com.oocl.coldplayfans.dao.Order;
-import com.oocl.coldplayfans.repository.MerchandiseDbRepository;
 import com.oocl.coldplayfans.repository.OrderDbRepository;
 import java.util.List;
 
@@ -36,4 +34,7 @@ public class OrderService {
         return orderDbRepository.updateOrder(id, updatedOrder);
     }
 
+    public List<Order> getOrdersByItemType(String itemType) {
+        return orderDbRepository.getOrdersByItemType(itemType);
+    }
 }

@@ -1,6 +1,4 @@
 package com.oocl.coldplayfans.dao;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -8,7 +6,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "merchandise")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Merchandise {
 
     @Id
@@ -30,10 +27,8 @@ public class Merchandise {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @Column(name = "order_id")
+    private Integer orderId;
 
     @Column(name = "img_url")
     private String imgUrl;
@@ -122,11 +117,11 @@ public class Merchandise {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
-    public Order getOrder() {
-        return order;
+    public Integer getOrderId() {
+        return orderId;
     }
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public String getImgUrl() {

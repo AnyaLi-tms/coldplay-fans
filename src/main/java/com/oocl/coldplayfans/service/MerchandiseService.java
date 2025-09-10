@@ -5,14 +5,36 @@ import org.springframework.stereotype.Service;
 
 
 import com.oocl.coldplayfans.repository.MerchandiseDbRepository;
+import com.oocl.coldplayfans.repository.OrderDbRepository;
+
+import jakarta.persistence.criteria.CriteriaBuilder.In;
+
+import com.oocl.coldplayfans.dao.Concert;
 import com.oocl.coldplayfans.dao.Merchandise;
+import com.oocl.coldplayfans.dao.Order;
+import com.oocl.coldplayfans.dao.Ticket;
+import com.oocl.coldplayfans.dto.TicketOrderResponse;
+import com.oocl.coldplayfans.dto.UserTicketOrderReponse;
+import com.oocl.coldplayfans.dto.UserMerchandiseResponse;
+import com.oocl.coldplayfans.dto.MerchandiseOrderResponse;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 
 
 @Service
 public class MerchandiseService {
     @Autowired
     private MerchandiseDbRepository merchandiseDbRepository;
+    @Autowired
+    private OrderDbRepository orderDbRepository;
 
     public MerchandiseService(MerchandiseDbRepository merchandiseDbRepository) {
         this.merchandiseDbRepository = merchandiseDbRepository;
@@ -36,6 +58,52 @@ public class MerchandiseService {
     }
     public List<Merchandise> getMerchandiseByOrderId(Integer orderId) {
         return merchandiseDbRepository.getMerchandiseByOrderId(orderId);
+    }
+
+    public List<Merchandise> getInStockMerchandises(String name) {
+        return merchandiseDbRepository.findInStockMerchandises(name);
+    }
+
+    public List<Merchandise> buyMerchandises(Integer userId, Integer quantity, String name, String address) {
+        List<Merchandise> merchandises = merchandiseDbRepository.findInStockMerchandises(name);
+        if (merchandises.size() < quantity) {
+            throw new RuntimeException("库存不足，请重试");
+        }
+        Order order = new Order("merchandise", address);
+        Order newOrder = orderDbRepository.createOrder(order);
+        for (int i = 0; i < quantity; i++) {
+            Merchandise merchandise = merchandises.get(i);
+            merchandise.setUserId(userId);
+            merchandise.setStatus("purchased");
+            merchandise.setPurchaseDate(LocalDateTime.now(ZoneId.of("Asia/Shanghai")));
+            merchandise.setOrderId(newOrder.getId());
+            merchandiseDbRepository.updateMerchandise(merchandise.getId(), merchandise);
+        }
+        return merchandises;
+    }
+
+    public List<UserMerchandiseResponse> loadMerchandiseOrders(int userId) {
+        List<Merchandise> userMerchandises = merchandiseDbRepository.getMerchandiseByUserId(userId);
+        Map<Integer, List<Merchandise>> merchandiseListByOrderId = userMerchandises.stream().collect(Collectors.groupingBy(Merchandise::getOrderId));
+        List<UserMerchandiseResponse> userMerchandiseOrderList = new ArrayList<>();
+        for(List<Merchandise> merchandises : merchandiseListByOrderId.values()){
+            Integer orderId = merchandises.getFirst().getOrderId();
+            Integer amount = merchandises.size();
+            String imgUrl = merchandises.getFirst().getImgUrl();
+            BigDecimal totalPrice = merchandises.stream()
+                    .map(Merchandise::getPrice)
+                    .filter(Objects::nonNull)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            LocalDateTime purchaseDate = merchandises.getFirst().getPurchaseDate();
+            List<MerchandiseOrderResponse> merchandiseOrderResponses = new ArrayList<>();
+            for(Merchandise merchandise : merchandises){
+                MerchandiseOrderResponse merchandiseOrderResponse = new MerchandiseOrderResponse(merchandise.getId(), merchandise.getName(), merchandise.getPrice());
+                merchandiseOrderResponses.add(merchandiseOrderResponse);
+            }
+            UserMerchandiseResponse userMerchandiseResponse = new UserMerchandiseResponse(orderId, amount, totalPrice, purchaseDate, "交易完成", merchandiseOrderResponses, imgUrl);
+            userMerchandiseOrderList.add(userMerchandiseResponse);
+        }
+        return userMerchandiseOrderList;
     }
     
 
