@@ -55,13 +55,13 @@ public class MerchandiseService {
         return merchandiseDbRepository.getMerchandiseByOrderId(orderId);
     }
 
-    public List<Merchandise> getInStockMerchandises(String name) {
-        return merchandiseDbRepository.findInStockMerchandises(name);
+    public List<Merchandise> getInStockMerchandises(String type) {
+        return merchandiseDbRepository.findInStockMerchandises(type);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public List<Merchandise> buyMerchandises(Integer userId, Integer quantity, String name, String address) {
-        List<Merchandise> merchandises = merchandiseDbRepository.findInStockMerchandises(name);
+    public List<Merchandise> buyMerchandises(Integer userId, Integer quantity, String type, String address) {
+        List<Merchandise> merchandises = merchandiseDbRepository.findInStockMerchandises(type);
         if (merchandises.size() < quantity) {
             throw new RuntimeException("库存不足，请重试");
         }
@@ -100,6 +100,19 @@ public class MerchandiseService {
             userMerchandiseOrderList.add(userMerchandiseResponse);
         }
         return userMerchandiseOrderList;
+    }
+
+    public List<Merchandise> getAllDistinctMerchandise() {
+        return merchandiseDbRepository.getAllDistinctMerchandise();
+    }
+
+    public Map<String, Integer> getMerchandiseCountMap() {
+        List<Merchandise> merchandises = merchandiseDbRepository.getAllMerchandise();
+        merchandises = merchandises.stream()
+                .filter(m -> m.getStatus().equals("instock"))
+                .collect(Collectors.toList());
+        return merchandises.stream()
+                .collect(Collectors.groupingBy(m -> m.getName(), Collectors.summingInt(m -> 1)));
     }
     
 

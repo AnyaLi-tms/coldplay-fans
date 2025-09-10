@@ -37,6 +37,12 @@ public class MerchandiseController {
         this.merchandiseService = merchandiseService;
     }
 
+    @GetMapping("/distinct")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Merchandise> getAllDistinctMerchandise() {
+        return merchandiseService.getAllDistinctMerchandise();
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Merchandise> getAllMerchandise(@RequestParam(required = false) Integer orderId) {
@@ -46,6 +52,11 @@ public class MerchandiseController {
         return merchandiseService.getAllMerchandise();
     }
 
+    @GetMapping("/count")
+    public Map<String, Integer> getMerchandiseCount() {
+        return merchandiseService.getMerchandiseCountMap();
+    }
+    
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -62,12 +73,11 @@ public class MerchandiseController {
     @GetMapping("/instock")
     public List<Merchandise> getInStockMerchandise(@RequestBody Map<String, Object> map) {
         Integer quantity = (Integer) map.get("quantity");
-        String name = (String) map.get("name");
-        List<Merchandise> inStockMerchandises = merchandiseService.getInStockMerchandises(name);
+        String type = (String) map.get("type");
+        List<Merchandise> inStockMerchandises = merchandiseService.getInStockMerchandises(type);
         if (inStockMerchandises.size() < quantity) {
             throw new RuntimeException("库存不足，请重试");
         }
-
         return inStockMerchandises;
     }
 
@@ -95,9 +105,9 @@ public class MerchandiseController {
         try {
             Integer userId = Integer.parseInt((String) request.getAttribute("userId"));
             Integer quantity = (Integer) map.get("quantity");
-            String name = (String) map.get("name");
+            String type = (String) map.get("type");
             String address = (String) map.get("address");
-            List<Merchandise> merchandises = merchandiseService.buyMerchandises(userId, quantity, name, address);
+            List<Merchandise> merchandises = merchandiseService.buyMerchandises(userId, quantity, type, address);
             Map<String, String> successMap = new HashMap<>();
             successMap.put("msg", "购买周边成功");
             successMap.put("merchandises", merchandises.toString());

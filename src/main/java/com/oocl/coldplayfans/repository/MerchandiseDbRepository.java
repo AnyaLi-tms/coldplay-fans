@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+import java.util.ArrayList;
 
 @Repository
 public class MerchandiseDbRepository implements MerchandiseRepository {
@@ -17,10 +18,25 @@ public class MerchandiseDbRepository implements MerchandiseRepository {
         this.jpaMerchandiseRepository = jpaMerchandiseRepository;
     }
 
-
     @Override
     public List<Merchandise> getAllMerchandise() {
-        return jpaMerchandiseRepository.findAll();
+        return jpaMerchandiseRepository.findAll().stream().filter(m -> !m.getIsDeleted()).toList();
+    }
+
+    @Override
+    public List<Merchandise> getAllDistinctMerchandise() {
+        List<Merchandise> merchandises = jpaMerchandiseRepository.findAll();
+        List<String> distinctName = jpaMerchandiseRepository.findAllInStock();
+        List<Merchandise> result = new ArrayList<>();
+        for (String name : distinctName) {
+            for (Merchandise merchandise : merchandises) {
+                if (merchandise.getName().equals(name) && merchandise.getStatus().equals("instock") && !merchandise.getIsDeleted()) {
+                    result.add(merchandise);
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
     @Override
@@ -57,8 +73,8 @@ public class MerchandiseDbRepository implements MerchandiseRepository {
     }
 
     @Override
-    public List<Merchandise> findInStockMerchandises(String name) {
-        return jpaMerchandiseRepository.findInStockMerchandises(name);
+    public List<Merchandise> findInStockMerchandises(String type) {
+        return jpaMerchandiseRepository.findInStockMerchandises(type);
     }
 
     @Override

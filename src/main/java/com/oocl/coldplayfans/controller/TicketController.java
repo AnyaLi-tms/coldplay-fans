@@ -27,7 +27,7 @@ public class TicketController {
     public TicketPricesReponse getPriceListByConcert(@PathVariable Integer concertId) {
         return ticketService.getPriceListByConcert(concertId);
     }
-
+    
     @PutMapping("/buyTicket/{concertId}")
     public ResponseEntity<?> buyTickets(@PathVariable Integer concertId, HttpServletRequest request, @RequestBody Map<String, Object> map) {
         try {

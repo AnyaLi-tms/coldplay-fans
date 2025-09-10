@@ -10,6 +10,7 @@ public interface MerchandiseRepository {
     void deleteMerchandise(Integer id);
     Merchandise updateMerchandise(Integer id, Merchandise updatedMerchandise);
     List<Merchandise> getMerchandiseByOrderId(Integer orderId);
-    List<Merchandise> findInStockMerchandises(String name);
+    List<Merchandise> findInStockMerchandises(String type);
     List<Merchandise> getMerchandiseByUserId(Integer userId);
+    List<Merchandise> getAllDistinctMerchandise();
 }
