@@ -25,4 +25,5 @@ public interface JpaMerchandiseRepository extends JpaRepository<Merchandise, Int
     @Query("SELECT DISTINCT m.name FROM Merchandise m WHERE m.isDeleted = false AND m.status = 'instock'")
     List<String> findAllInStock();
 
+
 }
