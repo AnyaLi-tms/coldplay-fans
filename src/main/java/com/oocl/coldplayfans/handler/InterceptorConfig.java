@@ -11,6 +11,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(new JwtInterceptor())
                 .excludePathPatterns(
+                        "/health",
                         "/user/login",
                         "/user/register",
                         "/banners",
