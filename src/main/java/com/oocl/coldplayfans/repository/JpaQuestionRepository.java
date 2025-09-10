@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface JPAQuestionRepository extends JpaRepository<Question, Integer> {
+public interface JpaQuestionRepository extends JpaRepository<Question, Integer> {
     @Query(value = "SELECT * FROM question ORDER BY RAND() LIMIT 5", nativeQuery = true)
     List<Question> generateQuestion();
 }
