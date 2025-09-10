@@ -1,6 +1,6 @@
 package com.oocl.coldplayfans.repository;
 
-import com.oocl.coldplayfans.dao.Merchandise;
+import com.oocl.coldplayfans.model.Merchandise;
 import java.util.List;
 
 public interface MerchandiseRepository {

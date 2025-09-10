@@ -1,7 +1,6 @@
 package com.oocl.coldplayfans.controller;
 
-import com.oocl.coldplayfans.dao.Ticket;
-import com.oocl.coldplayfans.dto.TicketOrderResponse;
+import com.oocl.coldplayfans.model.Ticket;
 import com.oocl.coldplayfans.dto.TicketPricesReponse;
 import com.oocl.coldplayfans.dto.UserTicketOrderReponse;
 import com.oocl.coldplayfans.service.TicketService;

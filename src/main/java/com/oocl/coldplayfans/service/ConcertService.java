@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.oocl.coldplayfans.dao.Concert;
+import com.oocl.coldplayfans.model.Concert;
 import com.oocl.coldplayfans.repository.ConcertDbRepository;
 
 @Service

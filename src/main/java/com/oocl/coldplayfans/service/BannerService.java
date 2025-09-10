@@ -2,7 +2,7 @@ package com.oocl.coldplayfans.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.oocl.coldplayfans.repository.BannerDbRepository;
-import com.oocl.coldplayfans.dao.Banner;
+import com.oocl.coldplayfans.model.Banner;
 import java.util.List;
 
 

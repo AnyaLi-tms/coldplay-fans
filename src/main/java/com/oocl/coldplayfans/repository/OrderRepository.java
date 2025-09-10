@@ -2,7 +2,7 @@ package com.oocl.coldplayfans.repository;
 
 import java.util.List;
 
-import com.oocl.coldplayfans.dao.Order;
+import com.oocl.coldplayfans.model.Order;
 
 
 public interface OrderRepository {

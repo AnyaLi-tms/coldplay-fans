@@ -2,7 +2,7 @@ package com.oocl.coldplayfans.repository;
 
 import java.util.List;
 
-import com.oocl.coldplayfans.dao.Concert;
+import com.oocl.coldplayfans.model.Concert;
 
 
 public interface ConcertRepository {

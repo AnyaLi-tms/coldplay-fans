@@ -1,6 +1,6 @@
 package com.oocl.coldplayfans.repository;
 
-import com.oocl.coldplayfans.dao.User;
+import com.oocl.coldplayfans.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

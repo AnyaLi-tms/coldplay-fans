@@ -1,7 +1,6 @@
 package com.oocl.coldplayfans.controller;
 
 
-import com.oocl.coldplayfans.dao.Question;
 import com.oocl.coldplayfans.dto.AnswerRequest;
 import com.oocl.coldplayfans.dto.QuestionResponse;
 import com.oocl.coldplayfans.service.QuestionService;

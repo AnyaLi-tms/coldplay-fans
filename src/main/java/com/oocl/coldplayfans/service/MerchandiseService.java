@@ -7,16 +7,11 @@ import org.springframework.stereotype.Service;
 import com.oocl.coldplayfans.repository.MerchandiseDbRepository;
 import com.oocl.coldplayfans.repository.OrderDbRepository;
 
-import jakarta.persistence.criteria.CriteriaBuilder.In;
-
-import com.oocl.coldplayfans.dao.Concert;
-import com.oocl.coldplayfans.dao.Merchandise;
-import com.oocl.coldplayfans.dao.Order;
-import com.oocl.coldplayfans.dao.Ticket;
-import com.oocl.coldplayfans.dto.TicketOrderResponse;
-import com.oocl.coldplayfans.dto.UserTicketOrderReponse;
+import com.oocl.coldplayfans.model.Merchandise;
+import com.oocl.coldplayfans.model.Order;
 import com.oocl.coldplayfans.dto.UserMerchandiseResponse;
 import com.oocl.coldplayfans.dto.MerchandiseOrderResponse;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -64,6 +59,7 @@ public class MerchandiseService {
         return merchandiseDbRepository.findInStockMerchandises(name);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public List<Merchandise> buyMerchandises(Integer userId, Integer quantity, String name, String address) {
         List<Merchandise> merchandises = merchandiseDbRepository.findInStockMerchandises(name);
         if (merchandises.size() < quantity) {

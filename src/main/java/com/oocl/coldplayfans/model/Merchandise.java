@@ -1,4 +1,4 @@
-package com.oocl.coldplayfans.dao;
+package com.oocl.coldplayfans.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

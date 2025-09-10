@@ -1,6 +1,6 @@
 package com.oocl.coldplayfans.repository;
 
-import com.oocl.coldplayfans.dao.Order;
+import com.oocl.coldplayfans.model.Order;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

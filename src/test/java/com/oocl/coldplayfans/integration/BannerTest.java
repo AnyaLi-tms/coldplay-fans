@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.oocl.coldplayfans.dao.Banner;
+import com.oocl.coldplayfans.model.Banner;
 import com.oocl.coldplayfans.repository.BannerDbRepository;
 
 

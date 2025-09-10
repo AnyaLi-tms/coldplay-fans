@@ -1,6 +1,6 @@
 package com.oocl.coldplayfans.repository;
 
-import com.oocl.coldplayfans.dao.Question;
+import com.oocl.coldplayfans.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

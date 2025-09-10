@@ -1,4 +1,4 @@
-package com.oocl.coldplayfans.dao;
+package com.oocl.coldplayfans.model;
 
 import jakarta.persistence.*;
 

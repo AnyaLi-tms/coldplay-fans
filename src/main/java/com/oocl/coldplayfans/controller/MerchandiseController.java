@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.oocl.coldplayfans.dao.Merchandise;
+import com.oocl.coldplayfans.model.Merchandise;
 import com.oocl.coldplayfans.dto.UserMerchandiseResponse;
 import com.oocl.coldplayfans.service.MerchandiseService;
 

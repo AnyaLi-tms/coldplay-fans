@@ -1,5 +1,5 @@
 package com.oocl.coldplayfans.repository;
-import com.oocl.coldplayfans.dao.Banner;
+import com.oocl.coldplayfans.model.Banner;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

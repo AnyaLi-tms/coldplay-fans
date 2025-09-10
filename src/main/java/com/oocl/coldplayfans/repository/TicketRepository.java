@@ -1,6 +1,6 @@
 package com.oocl.coldplayfans.repository;
 
-import com.oocl.coldplayfans.dao.Ticket;
+import com.oocl.coldplayfans.model.Ticket;
 
 import java.util.List;
 

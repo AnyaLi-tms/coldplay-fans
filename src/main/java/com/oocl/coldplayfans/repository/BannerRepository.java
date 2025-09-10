@@ -1,7 +1,7 @@
 package com.oocl.coldplayfans.repository;
 import java.util.List;
 
-import com.oocl.coldplayfans.dao.Banner;
+import com.oocl.coldplayfans.model.Banner;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.oocl.coldplayfans.repository.ConcertDbRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.oocl.coldplayfans.dao.Concert;
+import com.oocl.coldplayfans.model.Concert;
 
 
 

@@ -1,6 +1,6 @@
 package com.oocl.coldplayfans.dto.mapper;
 
-import com.oocl.coldplayfans.dao.User;
+import com.oocl.coldplayfans.model.User;
 import com.oocl.coldplayfans.dto.UserResponse;
 import org.springframework.beans.BeanUtils;
 

@@ -3,7 +3,7 @@ package com.oocl.coldplayfans.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.oocl.coldplayfans.dao.Order;
+import com.oocl.coldplayfans.model.Order;
 import com.oocl.coldplayfans.repository.OrderDbRepository;
 import java.util.List;
 

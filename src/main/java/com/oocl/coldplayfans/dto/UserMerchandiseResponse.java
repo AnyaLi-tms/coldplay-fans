@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import com.oocl.coldplayfans.dao.Merchandise;
 
 public class UserMerchandiseResponse {
     private Integer orderId;

@@ -1,4 +1,4 @@
-package com.oocl.coldplayfans.dao;
+package com.oocl.coldplayfans.model;
 import java.sql.Date;
 import java.sql.Time;
 import jakarta.persistence.*;

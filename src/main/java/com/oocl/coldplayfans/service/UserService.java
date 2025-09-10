@@ -1,6 +1,6 @@
 package com.oocl.coldplayfans.service;
 
-import com.oocl.coldplayfans.dao.User;
+import com.oocl.coldplayfans.model.User;
 import com.oocl.coldplayfans.repository.UserDbRepository;
 import com.oocl.coldplayfans.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;

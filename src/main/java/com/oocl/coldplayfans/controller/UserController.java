@@ -1,6 +1,6 @@
 package com.oocl.coldplayfans.controller;
 
-import com.oocl.coldplayfans.dao.User;
+import com.oocl.coldplayfans.model.User;
 import com.oocl.coldplayfans.dto.UserResponse;
 import com.oocl.coldplayfans.dto.mapper.UserMapper;
 import com.oocl.coldplayfans.service.UserService;
