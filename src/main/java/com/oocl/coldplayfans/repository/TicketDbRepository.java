@@ -27,4 +27,8 @@ public class TicketDbRepository {
     public List<Ticket> saveAll(List<Ticket> tickets) {
         return jpaTicketRepository.saveAll(tickets);
     }
+
+    public List<Ticket> getTicketByUserId(int userId) {
+        return jpaTicketRepository.findByUserId(userId);
+    }
 }

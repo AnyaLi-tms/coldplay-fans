@@ -1,7 +1,9 @@
 package com.oocl.coldplayfans.controller;
 
 import com.oocl.coldplayfans.dao.Ticket;
+import com.oocl.coldplayfans.dto.TicketOrderResponse;
 import com.oocl.coldplayfans.dto.TicketPricesReponse;
+import com.oocl.coldplayfans.dto.UserTicketOrderReponse;
 import com.oocl.coldplayfans.service.TicketService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,10 @@ public class TicketController {
             }
             String seatArea = (String) map.get("seatArea");
             if (seatArea == null || seatArea.trim().isEmpty()) {
-                return ResponseEntity.badRequest().body("seatArea不能为空");
+                Map<String, String> errMap = new HashMap<>();
+                errMap.put("msg", "seatArea不能为空");
+                errMap.put("status", "false");
+                return ResponseEntity.badRequest().body(errMap);
             }
             Integer userId = Integer.parseInt((String) request.getAttribute("userId"));
             List<Ticket> existingTickets = ticketService.findTicketByIdNumsAndConcertId(concertId, idNums);
@@ -63,6 +68,11 @@ public class TicketController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(errMap);
         }
+    }
+
+    @GetMapping("/myTicket")
+    public List<UserTicketOrderReponse> loadTicketOrders(HttpServletRequest request){
+        return ticketService.loadTicketOrders(Integer.parseInt((String) request.getAttribute("userId")));
     }
 
 }

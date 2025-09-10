@@ -21,4 +21,6 @@ public interface JpaTicketRepository extends JpaRepository<Ticket, Integer> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT t FROM Ticket t WHERE t.concertId = :concertId AND t.seatArea = :seatArea AND (t.idNumber IS NULL OR t.idNumber = '') ORDER BY t.id ASC limit :limit")
     List<Ticket> findEmptyIdNumberWithLock(@Param("concertId") Integer concertId, @Param("seatArea") String seatArea, @Param("limit") int limit);
+
+    List<Ticket> findByUserId(int userId);
 }
