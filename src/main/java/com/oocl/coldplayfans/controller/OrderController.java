@@ -42,12 +42,6 @@ public class OrderController {
     public Order getOrderById(@PathVariable Integer id) {
         return orderService.getOrderById(id);
     }
-
-    @GetMapping("/type/{itemType}")
-    public List<Order> getOrdersByItemType(@PathVariable String itemType, HttpServletRequest request) {
-        Integer userId = Integer.parseInt((String) request.getAttribute("userId"));
-        return orderService.getOrdersByItemType(itemType, userId);
-    }
     
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

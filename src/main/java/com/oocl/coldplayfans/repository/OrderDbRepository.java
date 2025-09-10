@@ -46,10 +46,5 @@ public class OrderDbRepository implements OrderRepository {
         jpaOrderRepository.deleteById(id);
     }
 
-    @Override
-    public List<Order> getOrdersByItemType(String itemType, Integer userId) {
-        return jpaOrderRepository.findByItemType(itemType, userId);
-    }
-    
     
 } 

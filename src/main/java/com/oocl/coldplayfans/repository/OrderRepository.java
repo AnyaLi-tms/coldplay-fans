@@ -11,5 +11,4 @@ public interface OrderRepository {
     Order createOrder(Order order);
     Order updateOrder(Integer id, Order order);
     void deleteOrder(Integer id);
-    List<Order> getOrdersByItemType(String itemType, Integer userId);
 }
