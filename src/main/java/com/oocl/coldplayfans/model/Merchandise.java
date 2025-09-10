@@ -17,6 +17,9 @@ public class Merchandise {
     @Column(name = "user_id")
     private Integer userId;
 
+    @Column(name = "type")
+    private String type;
+
     private BigDecimal price;
 
     @Column(name = "purchase_date")
@@ -60,6 +63,19 @@ public class Merchandise {
         this.description = description;
     }
 
+    public Merchandise(Integer id, String name, Integer userId, String type, BigDecimal price, LocalDateTime purchaseDate, String status, Boolean isDeleted, Integer orderId, String imgUrl, String description) {
+        this.id = id;
+        this.name = name;
+        this.userId = userId;
+        this.type = type;
+        this.price = price;
+        this.purchaseDate = purchaseDate;
+        this.status = status;
+        this.isDeleted = isDeleted;
+        this.orderId = orderId;
+        this.imgUrl = imgUrl;
+        this.description = description;
+    }
 
     // Getters and Setters
     public Integer getId() {
@@ -138,5 +154,13 @@ public class Merchandise {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
