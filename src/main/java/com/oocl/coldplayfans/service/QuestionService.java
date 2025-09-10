@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -32,11 +34,16 @@ public class QuestionService {
     }
 
     public Boolean validateAnswers(List<AnswerRequest> answers) {
-        boolean hasWrongAnswer = answers.stream()
-                .anyMatch(answer -> {
-                    Question question = questionDBRepository.findById(answer.getQuestionId());
-                    return !Objects.equals(answer.getAnswer(), question.getAnswer());
+        List<Integer> questionIds = answers.stream()
+                .map(AnswerRequest::getQuestionId)
+                .distinct()
+                .toList();
+        List<Question> questionList = questionDBRepository.findByIds(questionIds);
+        Map<Integer, Question> questionMap = questionList.stream().collect(Collectors.toMap(Question::getId, question -> question));
+        return answers.stream()
+                .allMatch(answer -> {
+                    Question question = questionMap.get(answer.getQuestionId());
+                    return question != null && Objects.equals(answer.getAnswer(), question.getAnswer());
                 });
-        return !hasWrongAnswer;
     }
 }

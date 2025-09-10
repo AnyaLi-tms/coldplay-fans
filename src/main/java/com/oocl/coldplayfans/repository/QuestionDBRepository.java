@@ -16,7 +16,7 @@ public class QuestionDBRepository implements QuestionRepository {
         return jpaQuestionRepository.generateQuestion();
     }
 
-    public Question findById(Integer questionId) {
-        return jpaQuestionRepository.findById(questionId).orElse(null);
+    public List<Question> findByIds(List<Integer> questionIds) {
+        return jpaQuestionRepository.findAllById(questionIds);
     }
 }
