@@ -47,8 +47,8 @@ public class OrderDbRepository implements OrderRepository {
     }
 
     @Override
-    public List<Order> getOrdersByItemType(String itemType) {
-        return jpaOrderRepository.findByItemType(itemType);
+    public List<Order> getOrdersByItemType(String itemType, Integer userId) {
+        return jpaOrderRepository.findByItemType(itemType, userId);
     }
     
     

@@ -7,6 +7,6 @@ import java.util.List;
 
 @Repository
 public interface JpaOrderRepository extends JpaRepository<Order, Integer> {
-    @Query("SELECT o FROM Order o WHERE o.itemType =:itemType AND o.isDeleted = false")
-    List<Order> findByItemType(String itemType);
+    @Query("SELECT o FROM Order o WHERE o.itemType =:itemType AND o.userId =:userId AND o.isDeleted = false")
+    List<Order> findByItemType(String itemType, Integer userId);
 }
