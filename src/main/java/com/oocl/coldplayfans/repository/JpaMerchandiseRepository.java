@@ -22,8 +22,7 @@ public interface JpaMerchandiseRepository extends JpaRepository<Merchandise, Int
     @Query("SELECT m FROM Merchandise m WHERE m.userId = :userId AND m.isDeleted = false")
     List<Merchandise> findByUserId(Integer userId);
 
-    @Query("SELECT DISTINCT m.name FROM Merchandise m WHERE m.isDeleted = false AND m.status = 'instock'")
-    List<String> findAllInStock();
-
+    @Query("SELECT DISTINCT m.name FROM Merchandise m WHERE m.isDeleted = false AND m.status = 'instock' AND (m.name LIKE %:query% OR m.description LIKE %:query%)")
+    List<String> findAllInStock(String query);
 
 }

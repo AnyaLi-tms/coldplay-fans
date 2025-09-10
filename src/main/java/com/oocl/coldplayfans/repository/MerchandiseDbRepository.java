@@ -24,9 +24,9 @@ public class MerchandiseDbRepository implements MerchandiseRepository {
     }
 
     @Override
-    public List<Merchandise> getAllDistinctMerchandise() {
+    public List<Merchandise> getAllDistinctMerchandise(String query) {
         List<Merchandise> merchandises = jpaMerchandiseRepository.findAll();
-        List<String> distinctName = jpaMerchandiseRepository.findAllInStock();
+        List<String> distinctName = jpaMerchandiseRepository.findAllInStock(query);
         List<Merchandise> result = new ArrayList<>();
         for (String name : distinctName) {
             for (Merchandise merchandise : merchandises) {

@@ -40,15 +40,10 @@ public class MerchandiseController {
     @GetMapping("/distinct")
     @ResponseStatus(HttpStatus.OK)
     public List<Merchandise> getAllDistinctMerchandise(
-            @RequestParam(required = false) String query,
+            @RequestParam String query,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        List<Merchandise> merchandises = merchandiseService.getAllDistinctMerchandise();
-        if (query != null && !query.isEmpty()) {
-            merchandises = merchandises.stream()
-                    .filter(m -> m.getName().toLowerCase().contains(query.toLowerCase()))
-                    .toList();
-        }
+        List<Merchandise> merchandises = merchandiseService.getAllDistinctMerchandise(query);
         int start = Math.min(page * size, merchandises.size());
         int end = Math.min(start + size, merchandises.size());
         return merchandises.subList(start, end);

@@ -102,8 +102,8 @@ public class MerchandiseService {
         return userMerchandiseOrderList;
     }
 
-    public List<Merchandise> getAllDistinctMerchandise() {
-        return merchandiseDbRepository.getAllDistinctMerchandise();
+    public List<Merchandise> getAllDistinctMerchandise(String query) {
+        return merchandiseDbRepository.getAllDistinctMerchandise(query);
     }
 
     public Map<String, Integer> getMerchandiseCountMap() {
