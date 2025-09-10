@@ -34,7 +34,7 @@ public class OrderService {
         return orderDbRepository.updateOrder(id, updatedOrder);
     }
 
-    public List<Order> getOrdersByItemType(String itemType) {
-        return orderDbRepository.getOrdersByItemType(itemType);
+    public List<Order> getOrdersByItemType(String itemType, Integer userId) {
+        return orderDbRepository.getOrdersByItemType(itemType, userId);
     }
 }

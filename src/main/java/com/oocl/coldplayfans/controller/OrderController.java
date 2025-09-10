@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
+import jakarta.servlet.http.HttpServletRequest;
 
 
 
@@ -43,8 +44,9 @@ public class OrderController {
     }
 
     @GetMapping("/type/{itemType}")
-    public List<Order> getOrdersByItemType(@PathVariable String itemType) {
-        return orderService.getOrdersByItemType(itemType);
+    public List<Order> getOrdersByItemType(@PathVariable String itemType, HttpServletRequest request) {
+        Integer userId = Integer.parseInt((String) request.getAttribute("userId"));
+        return orderService.getOrdersByItemType(itemType, userId);
     }
     
     @DeleteMapping("/{id}")
