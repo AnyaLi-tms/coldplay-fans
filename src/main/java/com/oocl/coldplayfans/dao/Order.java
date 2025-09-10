@@ -16,7 +16,7 @@ public class Order {
     private String itemType;
 
     @Column(name = "status")
-    private String status = "pending";
+    private String status = "active";
 
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted = false;
@@ -32,7 +32,6 @@ public class Order {
 
     public Order(String itemType, String address) {
         this.itemType = itemType;
-        this.status = "active";
         this.address = address;
     }
 
