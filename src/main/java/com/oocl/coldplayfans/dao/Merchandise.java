@@ -1,6 +1,8 @@
 package com.oocl.coldplayfans.dao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
@@ -18,7 +20,7 @@ public class Merchandise {
     @Column(name = "user_id")
     private Integer userId;
 
-    private Double price;
+    private BigDecimal price;
 
     @Column(name = "purchase_date")
     private LocalDateTime purchaseDate;
@@ -43,7 +45,7 @@ public class Merchandise {
     public Merchandise() {
     }
 
-    public Merchandise(String name, Double price, String imgUrl, String description) {
+    public Merchandise(String name, BigDecimal price, String imgUrl, String description) {
         this.name = name;
         this.price = price;
         this.status = "instock";
@@ -52,7 +54,7 @@ public class Merchandise {
         this.description = description;
     }
 
-    public Merchandise(String name, Integer userId, Double price, LocalDateTime purchaseDate, String imgUrl, String description) {
+    public Merchandise(String name, Integer userId, BigDecimal price, LocalDateTime purchaseDate, String imgUrl, String description) {
         this.name = name;
         this.userId = userId;
         this.price = price;
@@ -89,11 +91,11 @@ public class Merchandise {
         this.userId = userId;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

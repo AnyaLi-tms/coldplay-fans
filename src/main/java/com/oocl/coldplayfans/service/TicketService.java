@@ -1,10 +1,13 @@
 package com.oocl.coldplayfans.service;
 
+import com.oocl.coldplayfans.dao.Order;
 import com.oocl.coldplayfans.dao.Ticket;
 import com.oocl.coldplayfans.dto.Price;
 import com.oocl.coldplayfans.dto.TicketPricesReponse;
+import com.oocl.coldplayfans.repository.OrderDbRepository;
 import com.oocl.coldplayfans.repository.TicketDbRepository;
 import io.micrometer.common.util.StringUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,12 +16,17 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class TicketService {
     @Autowired
     private TicketDbRepository ticketDbRepository;
+    @Autowired
+    private OrderDbRepository orderDbRepository;
+
+    private final String TICKET = "ticket";
 
     public TicketPricesReponse getPriceListByConcert(Integer concertId) {
         List<Ticket> tickets = ticketDbRepository.getTicketsByConcertId(concertId);
@@ -57,7 +65,11 @@ public class TicketService {
             ticket.setIdNumber(idNums.get(i));
             LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Shanghai"));
             ticket.setPurchaseDate(now);
+            Order order = new Order(TICKET, null);
+            Order newOreder = orderDbRepository.createOrder(order);
+            ticket.setOrderId(newOreder.getId());
         }
         return ticketDbRepository.saveAll(tickets);
     }
+
 }

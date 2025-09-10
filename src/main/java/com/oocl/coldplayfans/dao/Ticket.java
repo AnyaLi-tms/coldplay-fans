@@ -39,6 +39,9 @@ public class Ticket {
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted = false;
 
+    @Column(name = "order_id")
+    private Integer orderId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "concert_id", insertable = false, updatable = false)
     private Concert concert;
@@ -135,5 +138,13 @@ public class Ticket {
                 ", price=" + price +
                 ", purchaseDate=" + purchaseDate +
                 '}';
+    }
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 }

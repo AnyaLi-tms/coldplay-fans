@@ -1,8 +1,5 @@
 package com.oocl.coldplayfans.controller;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oocl.coldplayfans.dao.Ticket;
 import com.oocl.coldplayfans.dto.TicketPricesReponse;
 import com.oocl.coldplayfans.service.TicketService;
@@ -12,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
