@@ -115,5 +115,8 @@ public class MerchandiseService {
                 .collect(Collectors.groupingBy(m -> m.getName(), Collectors.summingInt(m -> 1)));
     }
     
+    public List<Merchandise> getMerchandiseByType(String type) {
+        return merchandiseDbRepository.getMerchandiseByType(type);
+    }
 
 }

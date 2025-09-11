@@ -13,4 +13,5 @@ public interface MerchandiseRepository {
     List<Merchandise> findInStockMerchandises(String type);
     List<Merchandise> getMerchandiseByUserId(Integer userId);
     List<Merchandise> getAllDistinctMerchandise(String query);
+    List<Merchandise> getMerchandiseByType(String type);
 }

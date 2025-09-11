@@ -81,4 +81,9 @@ public class MerchandiseDbRepository implements MerchandiseRepository {
     public List<Merchandise> getMerchandiseByUserId(Integer userId) {
         return jpaMerchandiseRepository.findByUserId(userId);
     }
+
+    @Override
+    public List<Merchandise> getMerchandiseByType(String type) {
+        return jpaMerchandiseRepository.findByType(type);
+    }   
 }
