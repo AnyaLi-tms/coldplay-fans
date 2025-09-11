@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+import java.sql.Time;
 
 public class UserTicketOrderReponse {
 
@@ -15,6 +17,8 @@ public class UserTicketOrderReponse {
     private String concertImgUrl;
     private String status;
     List<TicketOrderResponse> ticketOrderList = new ArrayList<>();
+    private Date concertDate;
+    private Time concertTime;
 
     public Integer getOrderId() {
         return orderId;
@@ -80,7 +84,21 @@ public class UserTicketOrderReponse {
         this.ticketOrderList = ticketOrderList;
     }
 
-    public UserTicketOrderReponse(Integer orderId, String concertName, Integer amount, BigDecimal totalPrice, LocalDateTime purchaseDate, String concertImgUrl, String status, List<TicketOrderResponse> ticketOrderList) {
+    public Date getConcertDate() {
+        return concertDate;
+    }
+    public void setConcertDate(Date concertDate) {
+        this.concertDate = concertDate;
+    }
+    public Time getConcertTime() {
+        return concertTime;
+    }
+    public void setConcertTime(Time concertTime) {
+        this.concertTime = concertTime;
+    }
+    
+
+    public UserTicketOrderReponse(Integer orderId, String concertName, Integer amount, BigDecimal totalPrice, LocalDateTime purchaseDate, String concertImgUrl, String status, List<TicketOrderResponse> ticketOrderList, Date concertDate, Time concertTime) {
         this.orderId = orderId;
         this.concertName = concertName;
         this.amount = amount;
@@ -89,5 +107,7 @@ public class UserTicketOrderReponse {
         this.concertImgUrl = concertImgUrl;
         this.status = status;
         this.ticketOrderList = ticketOrderList;
+        this.concertDate = concertDate;
+        this.concertTime = concertTime;
     }
 }

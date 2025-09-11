@@ -98,7 +98,7 @@ public class TicketService {
                 TicketOrderResponse ticketOrderResponse = new TicketOrderResponse(ticket.getSeatNumber(), ticket.getIdNumber());
                 ticketOrderResponses.add(ticketOrderResponse);
             }
-            UserTicketOrderReponse userTicketOrderReponse = new UserTicketOrderReponse(orderId, concert.getName(), amount, totalPrice, purchaseDate, imgUrl, "交易完成", ticketOrderResponses);
+            UserTicketOrderReponse userTicketOrderReponse = new UserTicketOrderReponse(orderId, concert.getName(), amount, totalPrice, purchaseDate, imgUrl, "交易完成", ticketOrderResponses, concert.getStartDate(), concert.getStartTime());
             userTicketOrderList.add(userTicketOrderReponse);
         }
         return userTicketOrderList;
