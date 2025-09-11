@@ -99,6 +99,7 @@ public class MerchandiseService {
             UserMerchandiseResponse userMerchandiseResponse = new UserMerchandiseResponse(orderId, amount, totalPrice, purchaseDate, "交易完成", merchandiseOrderResponses, imgUrl);
             userMerchandiseOrderList.add(userMerchandiseResponse);
         }
+        userMerchandiseOrderList.sort((o1, o2) -> o2.getPurchaseDate().compareTo(o1.getPurchaseDate()));
         return userMerchandiseOrderList;
     }
 

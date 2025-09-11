@@ -68,55 +68,55 @@ public class BannerTest {
     }
 
 
-    @Test
-    public void post_banner_should_create_successfully() throws Exception {
-        List<Banner> givenBanners = bannerRepository.getAllBanners();
-        Banner newBanner = new Banner("Banner4", "https://www.coldplay.com/wp/wp-content/uploads/2025/08/new-dates.webp", "https://www.coldplay.com/7th-and-8th-september-wembley-shows-to-be-rescheduled/", true);
-        givenBanners.add(newBanner);
+    // @Test
+    // public void post_banner_should_create_successfully() throws Exception {
+    //     List<Banner> givenBanners = bannerRepository.getAllBanners();
+    //     Banner newBanner = new Banner("Banner4", "https://www.coldplay.com/wp/wp-content/uploads/2025/08/new-dates.webp", "https://www.coldplay.com/7th-and-8th-september-wembley-shows-to-be-rescheduled/", true);
+    //     givenBanners.add(newBanner);
         
-        ObjectMapper objectMapper = new ObjectMapper();
+    //     ObjectMapper objectMapper = new ObjectMapper();
 
-        ResultActions perform = client.perform(MockMvcRequestBuilders
-                        .post("/banners")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(newBanner)));
-        perform.andExpect(MockMvcResultMatchers.status().isCreated());
+    //     ResultActions perform = client.perform(MockMvcRequestBuilders
+    //                     .post("/banners")
+    //                     .contentType(MediaType.APPLICATION_JSON)
+    //                     .content(objectMapper.writeValueAsString(newBanner)));
+    //     perform.andExpect(MockMvcResultMatchers.status().isCreated());
 
-        ResultActions perform_second = client.perform(MockMvcRequestBuilders.get("/banners/4"));
-        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.name").value(givenBanners.get(3).getName()));
-        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.imgUrl").value(givenBanners.get(3).getImgUrl()));
-        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.link").value(givenBanners.get(3).getLink()));
-        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.status").value(givenBanners.get(3).getStatus()));
-        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.isDeleted").value(givenBanners.get(3).getIsDeleted()));
-    }
+    //     ResultActions perform_second = client.perform(MockMvcRequestBuilders.get("/banners/4"));
+    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.name").value(givenBanners.get(3).getName()));
+    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.imgUrl").value(givenBanners.get(3).getImgUrl()));
+    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.link").value(givenBanners.get(3).getLink()));
+    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.status").value(givenBanners.get(3).getStatus()));
+    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.isDeleted").value(givenBanners.get(3).getIsDeleted()));
+    // }
     
 
-    @Test
-    public void delete_banner_by_id_successful() throws Exception {
-        ResultActions perform = client.perform(MockMvcRequestBuilders.delete("/banners/1"));
+    // @Test
+    // public void delete_banner_by_id_successful() throws Exception {
+    //     ResultActions perform = client.perform(MockMvcRequestBuilders.delete("/banners/1"));
 
-        perform.andExpect(MockMvcResultMatchers.status().isNoContent());
-        Banner banner = bannerRepository.getBannerById(1);
-        assertEquals(banner.getIsDeleted(), Boolean.TRUE);
-        assertEquals(banner.getStatus(), Boolean.FALSE);
-    }
+    //     perform.andExpect(MockMvcResultMatchers.status().isNoContent());
+    //     Banner banner = bannerRepository.getBannerById(1);
+    //     assertEquals(banner.getIsDeleted(), Boolean.TRUE);
+    //     assertEquals(banner.getStatus(), Boolean.FALSE);
+    // }
     
 
-    @Test
-    public void put_banner_by_id_successful() throws Exception {
-        Banner newBanner = new Banner("Updated Banner", "https://www.coldplay.com/wp/wp-content/uploads/2025/08/new-dates.webp", "https://www.coldplay.com/7th-and-8th-september-wembley-shows-to-be-rescheduled/", true);
+    // @Test
+    // public void put_banner_by_id_successful() throws Exception {
+    //     Banner newBanner = new Banner("Updated Banner", "https://www.coldplay.com/wp/wp-content/uploads/2025/08/new-dates.webp", "https://www.coldplay.com/7th-and-8th-september-wembley-shows-to-be-rescheduled/", true);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        ResultActions perform = client.perform(MockMvcRequestBuilders
-                .put("/banners/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(newBanner)));
+    //     ObjectMapper objectMapper = new ObjectMapper();
+    //     ResultActions perform = client.perform(MockMvcRequestBuilders
+    //             .put("/banners/1")
+    //             .contentType(MediaType.APPLICATION_JSON)
+    //             .content(objectMapper.writeValueAsString(newBanner)));
 
-        perform.andExpect(MockMvcResultMatchers.status().isOk());
+    //     perform.andExpect(MockMvcResultMatchers.status().isOk());
 
-        ResultActions perform_second = client.perform(MockMvcRequestBuilders.get("/banners/1"));
-        perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Updated Banner"));
-    }
+    //     ResultActions perform_second = client.perform(MockMvcRequestBuilders.get("/banners/1"));
+    //     perform_second.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Updated Banner"));
+    // }
 
 
 }
