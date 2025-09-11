@@ -102,7 +102,7 @@ public class TicketService {
             UserTicketOrderReponse userTicketOrderReponse = new UserTicketOrderReponse(orderId, concert.getName(), amount, totalPrice, purchaseDate, imgUrl, "交易完成", ticketOrderResponses, concert.getStartDate(), concert.getStartTime());
             userTicketOrderList.add(userTicketOrderReponse);
         }
-        userTicketOrderList.sort((o1, o2) -> o1.getPurchaseDate().compareTo(o2.getPurchaseDate()));
+        userTicketOrderList.sort((o1, o2) -> o2.getPurchaseDate().compareTo(o1.getPurchaseDate()));
         return userTicketOrderList;
     }
 }
