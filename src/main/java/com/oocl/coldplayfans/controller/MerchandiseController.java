@@ -40,13 +40,9 @@ public class MerchandiseController {
     @GetMapping("/distinct")
     @ResponseStatus(HttpStatus.OK)
     public List<Merchandise> getAllDistinctMerchandise(
-            @RequestParam String query,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam String query) {
         List<Merchandise> merchandises = merchandiseService.getAllDistinctMerchandise(query);
-        int start = Math.min(page * size, merchandises.size());
-        int end = Math.min(start + size, merchandises.size());
-        return merchandises.subList(start, end);
+        return merchandises;
     }
 
     @GetMapping
