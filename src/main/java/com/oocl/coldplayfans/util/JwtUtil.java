@@ -19,7 +19,7 @@ public class JwtUtil {
         map.forEach(builder::withClaim);
 
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.DATE, 1);
+        instance.add(Calendar.DATE, 100);
 
         builder.withExpiresAt(instance.getTime());
         return builder.sign(Algorithm.HMAC256(SECRET));

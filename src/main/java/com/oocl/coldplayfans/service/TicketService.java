@@ -37,7 +37,7 @@ public class TicketService {
 
     public TicketPricesReponse getPriceListByConcert(Integer concertId) {
         List<Ticket> tickets = ticketDbRepository.getTicketsByConcertId(concertId);
-        List<Price> priceList = tickets.stream().filter(ticket -> ticket.getUserId() == null && StringUtils.isEmpty(ticket.getIdNumber()))
+        List<Price> priceList = tickets.stream()
                 .collect(Collectors.groupingBy(Ticket::getSeatArea))
                 .values().stream()
                 .map(areaTickets -> {
@@ -53,6 +53,7 @@ public class TicketService {
                 .collect(Collectors.toList());
         TicketPricesReponse response = new TicketPricesReponse();
         response.setPriceList(priceList);
+        response.setConcertId(concertId);
         return response;
     }
 

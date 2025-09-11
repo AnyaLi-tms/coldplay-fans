@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class TicketDbRepository {
+public class TicketDbRepository implements TicketRepository {
 
     @Autowired
     private JpaTicketRepository jpaTicketRepository;
