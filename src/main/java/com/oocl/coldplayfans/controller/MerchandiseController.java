@@ -133,5 +133,9 @@ public class MerchandiseController {
         return merchandiseService.loadMerchandiseOrders(Integer.parseInt((String) request.getAttribute("userId")));
     }
 
+    @GetMapping("/type/{type}")
+    public List<Merchandise> getMerchandiseByType(@PathVariable String type) {
+        return merchandiseService.getMerchandiseByType(type);
+    }
 
 }
