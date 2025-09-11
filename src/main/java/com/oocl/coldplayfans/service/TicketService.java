@@ -53,6 +53,7 @@ public class TicketService {
                 .collect(Collectors.toList());
         TicketPricesReponse response = new TicketPricesReponse();
         response.setPriceList(priceList);
+        response.setConcertId(concertId);
         return response;
     }
 
