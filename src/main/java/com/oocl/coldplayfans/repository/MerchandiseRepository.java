@@ -1,0 +1,17 @@
+package com.oocl.coldplayfans.repository;
+
+import com.oocl.coldplayfans.model.Merchandise;
+import java.util.List;
+
+public interface MerchandiseRepository {
+    List<Merchandise> getAllMerchandise();
+    Merchandise getMerchandiseById(Integer id);
+    Merchandise saveMerchandise(Merchandise merchandise);
+    void deleteMerchandise(Integer id);
+    Merchandise updateMerchandise(Integer id, Merchandise updatedMerchandise);
+    List<Merchandise> getMerchandiseByOrderId(Integer orderId);
+    List<Merchandise> findInStockMerchandises(String type);
+    List<Merchandise> getMerchandiseByUserId(Integer userId);
+    List<Merchandise> getAllDistinctMerchandise(String query);
+    List<Merchandise> getMerchandiseByType(String type);
+}
